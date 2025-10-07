@@ -50,6 +50,7 @@ in
     ".config/hypr".source = ./configs/hypr;
     ".config/waybar".source = ./configs/waybar;
     ".config/rofi".source = ./configs/rofi;
+    ".config/swaync".source = ./configs/swaync;
   };
 
   home.sessionVariables = {
