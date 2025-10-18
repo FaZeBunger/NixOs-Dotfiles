@@ -46,7 +46,10 @@ in
   ];
 
   home.file = {
-    ".config/nvim".source = ./configs/nvim;
+    ".config/nvim" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/configs/nvim";
+      recursive = true;
+    };
     ".config/hypr".source = ./configs/hypr;
     ".config/waybar".source = ./configs/waybar;
     ".config/rofi".source = ./configs/rofi;

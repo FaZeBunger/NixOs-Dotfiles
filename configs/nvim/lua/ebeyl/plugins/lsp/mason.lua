@@ -33,6 +33,7 @@ return {
 				"marksman",
 				"lua_ls",
 				"clangd",
+				"pyright",
 			},
 		})
 
