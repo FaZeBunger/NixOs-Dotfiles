@@ -140,6 +140,9 @@
     # Flake PKGS
     inputs.swww.packages.${pkgs.system}.swww 		# Flake for swww live wallpapers
 
+    #Steam stuff
+    pkgs.steam-run
+
     # DE PKGS
     pkgs.wayland 		# What Hyprland is built on
     pkgs.hyprlock		# Lockscreen for Hyprland
@@ -238,6 +241,12 @@
   };
 
   programs.wireshark.enable = true;
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+  stdenv.cc.cc
+];
+
 
 
   # This value determines the NixOS release from which the default

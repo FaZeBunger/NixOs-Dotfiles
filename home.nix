@@ -1,8 +1,9 @@
 { config, pkgs, inputs, ... }:
 let
   masterPkgs = import (builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
-    sha256 = "+JFrKE0Jtm+PTYWJrA5lv6ZA2DF5pH3B7yDj0nputg0=";
+    # url = "github:NixOS/nixpkgs/nixos-unstable";
+    url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+    sha256 = "1mqwcpjyq690m9m52njw0dr9baw715s4j9sh7s8nq5wf8psm6w98";
   }) { system = pkgs.system; };
 in
 {
@@ -43,6 +44,11 @@ in
     pkgs.go
     pkgs.nodejs_24
     (masterPkgs.gemini-cli)
+    pkgs.kicad
+    pkgs.obs-studio
+    pkgs.vlc
+    pkgs.magic-wormhole
+    pkgs.grimblast
   ];
 
   home.file = {
