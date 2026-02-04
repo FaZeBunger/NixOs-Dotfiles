@@ -49,11 +49,12 @@ in
     pkgs.vlc
     pkgs.magic-wormhole
     pkgs.grimblast
+    pkgs.xfce.thunar
   ];
 
   home.file = {
     ".config/nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/configs/nvim";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/configs/nvim";
       recursive = true;
     };
     ".config/hypr".source = ./configs/hypr;

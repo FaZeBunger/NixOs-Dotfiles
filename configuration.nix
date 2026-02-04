@@ -104,7 +104,7 @@
   # TODO: Fix this, idk why it doesn't work rn
   services.greetd.enable = true;
   services.greetd.settings.default_session = {
-    command = "${pkgs.hyprland}/bin/Hyprland";
+    command = "Hyprland";
     user = "ebeyl";
   };
     
@@ -145,7 +145,6 @@
     pkgs.hyprlock		# Lockscreen for Hyprland
     pkgs.hypridle		# Idle Manager for Hyprland
     pkgs.hyprpicker		# Color Picker for Hyprland
-    pkgs.hyprlock		# Lock Screen
     pkgs.hypridle		# Hyprland Idle Daemon
 
     # Nix PKGS
