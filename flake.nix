@@ -4,7 +4,7 @@
   inputs = {
 	nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05"; 
 
-    swww.url = "github:LGFae/swww";
+    awww.url = "git+https://codeberg.org/LGFae/awww";
 
 	home-manager = {
 		url = "github:nix-community/home-manager/release-25.05";
@@ -24,7 +24,8 @@
 			{
 				home-manager.useUserPackages = true;
 				home-manager.useGlobalPkgs = true;
-				home-manager.users.ebeyl = import ./home.nix;
+				home-manager.users.ebeyl = { imports = [ ./home.nix ]; };
+                home-manager.extraSpecialArgs = {inherit inputs; };
 			}
 		];
 	};

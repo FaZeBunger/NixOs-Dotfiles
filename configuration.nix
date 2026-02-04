@@ -41,7 +41,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  users.users.ebeyl = { # Replace "your-username"
+  users.users.ebeyl = { 
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" ]; # Enable 'sudo' for the user
     packages = with pkgs; [
@@ -137,9 +137,6 @@
     NO_PROXY = "";
   };
   environment.systemPackages = [
-    # Flake PKGS
-    inputs.swww.packages.${pkgs.system}.swww 		# Flake for swww live wallpapers
-
     #Steam stuff
     pkgs.steam-run
 
