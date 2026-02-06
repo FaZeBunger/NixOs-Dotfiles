@@ -50,6 +50,7 @@ in
     pkgs.magic-wormhole
     pkgs.grimblast
     pkgs.xfce.thunar
+    pkgs.qucs-s
   ];
 
   home.file = {
