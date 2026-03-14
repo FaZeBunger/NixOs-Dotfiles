@@ -20,8 +20,19 @@
   (self: super: {
   })
   ];
+  
+  networking.hosts = {
+    "127.0.0.1" = [ "homie.ai" ];
+  };
 
-  networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [40 443];
+    allowedUDPPortRanges = [
+      { from = 4000; to = 4007; }
+      { from = 8000; to = 8010; }
+    ];
+  };
 
 
   # Bootloader. Make sure to configure it properly!
@@ -165,7 +176,6 @@
     pkgs.direnv
     pkgs.wireshark		# Wireshark
 
-
     # Notification PKGS
     pkgs.swaynotificationcenter	# A Notification Center with GUI
     pkgs.brightnessctl		# Brightness Manager (SwayNC needs this)
@@ -240,8 +250,8 @@
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-  stdenv.cc.cc
-];
+    stdenv.cc.cc
+  ];
 
 
 

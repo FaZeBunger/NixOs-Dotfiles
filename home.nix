@@ -3,7 +3,7 @@ let
   masterPkgs = import (builtins.fetchTarball {
     # url = "github:NixOS/nixpkgs/nixos-unstable";
     url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-    sha256 = "1mqwcpjyq690m9m52njw0dr9baw715s4j9sh7s8nq5wf8psm6w98";
+    sha256 = "1n45klvjvjjwbw9c4244jyzwfsz0dcvjwv3sc4nf88cm5y3pcraq";
   }) { system = pkgs.system; };
 in
 {
@@ -28,7 +28,7 @@ in
   home.packages = [
     inputs.awww.packages.${pkgs.system}.awww 		# Flake for awww live wallpapers
     pkgs.vesktop
-  	pkgs.rofi-wayland
+  	pkgs.rofi
     pkgs.neovim
     pkgs.obsidian
     pkgs.spotify
@@ -50,7 +50,10 @@ in
     pkgs.magic-wormhole
     pkgs.grimblast
     pkgs.xfce.thunar
-    pkgs.qucs-s
+    pkgs.logisim-evolution
+    pkgs.chromium
+    pkgs.ryubing
+    pkgs.wl-clipboard
   ];
 
   home.file = {
