@@ -1,7 +1,8 @@
 { config, pkgs, inputs, ... }:
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # inputs.spicetify-nix.nixosModules.spicetify
     ];
@@ -17,17 +18,16 @@
 
   # Unstable Packages
   nixpkgs.overlays = [
-  (self: super: {
-  })
+    (self: super: { })
   ];
-  
+
   networking.hosts = {
     "127.0.0.1" = [ "homie.ai" ];
   };
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [40 443];
+    allowedTCPPorts = [ 40 443 ];
     allowedUDPPortRanges = [
       { from = 4000; to = 4007; }
       { from = 8000; to = 8010; }
@@ -41,7 +41,7 @@
   # Linux Kernel Version
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
-    "hid_quirks=0x04f3:0x413c:0x40"  # vendor:product:HID_QUIRK_NOINPUT
+    "hid_quirks=0x04f3:0x413c:0x40" # vendor:product:HID_QUIRK_NOINPUT
   ];
 
 
@@ -52,15 +52,15 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  users.users.ebeyl = { 
+  users.users.ebeyl = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" ]; # Enable 'sudo' for the user
     packages = with pkgs; [
       # Add any essential packages you want to start with, like a terminal
-       kitty
-       neovim
-       git
-       gh
+      kitty
+      neovim
+      git
+      gh
     ];
   };
 
@@ -72,23 +72,23 @@
 
   services.pulseaudio.enable = false;
   services.pipewire = {
-  	enable = true;
-	alsa.enable = true;
-	alsa.support32Bit = true;
-	pulse.enable = true;
-	jack.enable = true;
-	wireplumber = {
-	    enable = true; # Ensure WirePlumber is enabled
-	    extraConfig.bluetoothEnhancements = {
-		    "monitor.bluez.properties" = {
-			      "bluez5.enable-sbc-xq" = true;
-			      "bluez5.enable-msbc" = false; # Often recommended to disable if having issues
-			      "bluez5.enable-hw-volume" = true;
-			      "bluez5.auto-connect" = [ "a2dp_sink" ];
-			      "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
-		    };
-	    };
-	};
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+    wireplumber = {
+      enable = true; # Ensure WirePlumber is enabled
+      extraConfig.bluetoothEnhancements = {
+        "monitor.bluez.properties" = {
+          "bluez5.enable-sbc-xq" = true;
+          "bluez5.enable-msbc" = false; # Often recommended to disable if having issues
+          "bluez5.enable-hw-volume" = true;
+          "bluez5.auto-connect" = [ "a2dp_sink" ];
+          "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
+        };
+      };
+    };
   };
 
   # Select internationalisation properties.
@@ -118,7 +118,7 @@
     command = "Hyprland";
     user = "ebeyl";
   };
-    
+
   systemd.user.services.swaync = {
     enable = true;
     description = "Sway Notification Center";
@@ -133,7 +133,7 @@
   };
 
   services.udev = {
-  	extraRules = '' SUBSYSTEMS=="hid", KERNELS=="0018:04F3:413C.0001", DRIVERS=="hid-multitouch", ENV{LIBINPUT_IGNORE_DEVICE}="1" ''; 
+    extraRules = '' SUBSYSTEMS=="hid", KERNELS=="0018:04F3:413C.0001", DRIVERS=="hid-multitouch", ENV{LIBINPUT_IGNORE_DEVICE}="1" '';
   };
 
 
@@ -147,51 +147,34 @@
     HTTPS_PROXY = "";
     NO_PROXY = "";
   };
-  environment.systemPackages = [
-    #Steam stuff
-    pkgs.steam-run
 
-    # DE PKGS
-    pkgs.wayland 		# What Hyprland is built on
-    pkgs.hyprlock		# Lockscreen for Hyprland
-    pkgs.hypridle		# Idle Manager for Hyprland
-    pkgs.hyprpicker		# Color Picker for Hyprland
-    pkgs.hypridle		# Hyprland Idle Daemon
+  environment.systemPackages = [
 
     # Nix PKGS
-    pkgs.kitty   		# Default Hyprland terminal
-    pkgs.btop           	# Task Manager / System Resource Manager
-    pkgs.starship		# Terminal Prompt Manager ( May or may not use )
-    pkgs.eww			# Elko's Wacky Widgets ??? (idk how to spell it lol)
-    pkgs.inotify-tools		# Watching for file changes etc...
-    pkgs.gnumake		# Adds make for building C files
-    pkgs.gcc			# C compiler
-    pkgs.fzf			# Fuzzy Finder
-    pkgs.ripgrep		# RipGrep - Better Grep
-    pkgs.fd			# Better Find
-    pkgs.unzip			# Unzip
-    pkgs.python3		# Python
-    pkgs.python312Packages.pip  # Python Pip
-    pkgs.unrar			# Unrar
+    pkgs.kitty # Default Hyprland terminal
+    pkgs.starship # Terminal Prompt Manager ( May or may not use )
+    pkgs.inotify-tools # Watching for file changes etc...
+    pkgs.gnumake # Adds make for building C files
+    pkgs.gcc # C compiler
+    pkgs.fzf # Fuzzy Finder
+    pkgs.ripgrep # RipGrep - Better Grep
+    pkgs.fd # Better Find
+    pkgs.unzip # Unzip
+    pkgs.unrar # Unrar
     pkgs.direnv
-    pkgs.wireshark		# Wireshark
+    pkgs.wireshark # Wireshark
 
-    # Notification PKGS
-    pkgs.swaynotificationcenter	# A Notification Center with GUI
-    pkgs.brightnessctl		# Brightness Manager (SwayNC needs this)
-    pkgs.pamixer		# SwayNC needs this
 
     # Bluetooth Support (UI and Libs)
-    pkgs.blueman		# GTK Bluetooth Manager (SwayNC needs this)
-    pkgs.bluez			# Linux Bluetooth Protocol Stack
-    pkgs.bluez-alsa		# Bluz Alsa Backend
-    pkgs.bluez-tools		# Tools to manage bluetooth devices
+    pkgs.blueman # GTK Bluetooth Manager (SwayNC needs this)
+    pkgs.bluez # Linux Bluetooth Protocol Stack
+    pkgs.bluez-alsa # Bluz Alsa Backend
+    pkgs.bluez-tools # Tools to manage bluetooth devices
 
     # Media and Audio PGKS
-    pkgs.pavucontrol	# Audio Mixer and Controller
-    pkgs.playerctl	# Manages Media Playback
-    pkgs.jq		# Reads JSON
-    pkgs.cava		# Audio Visualizer
+    pkgs.pavucontrol # Audio Mixer and Controller
+    pkgs.playerctl # Manages Media Playback
+    pkgs.jq # Reads JSON
 
     # SSL Certification
     pkgs.nss
@@ -216,34 +199,22 @@
     pkgs.pkgs.font-awesome
     pkgs.pkgs.cascadia-code
     pkgs.pkgs.jetbrains-mono
-    pkgs.pkgs.material-design-icons 
+    pkgs.pkgs.material-design-icons
     pkgs.pkgs.mononoki
     pkgs.pkgs.noto-fonts-cjk-sans
   ];
 
-  /*
-  programs.spicetify = 
-  let 
-  	spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
-  in
-  {
-  	enable = true;
-	theme = spicePkgs.themes.dribbblish;
-	colorScheme = "catppuccin-mocha";
-  };
-  */
-  
   programs._1password.enable = true;
   programs._1password-gui = {
-  	enable = true;
-	polkitPolicyOwners = ["ebeyl"];
+    enable = true;
+    polkitPolicyOwners = [ "ebeyl" ];
   };
 
   programs.steam = {
-  	enable = true;
-	remotePlay.openFirewall = true;
-	dedicatedServer.openFirewall = true;
-	localNetworkGameTransfers.openFirewall = true;
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
   };
 
   programs.wireshark.enable = true;
@@ -252,7 +223,6 @@
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc
   ];
-
 
 
   # This value determines the NixOS release from which the default

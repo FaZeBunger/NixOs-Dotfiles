@@ -1,14 +1,41 @@
 { config, pkgs, inputs, ... }:
 let
-  masterPkgs = import (builtins.fetchTarball {
-    # url = "github:NixOS/nixpkgs/nixos-unstable";
-    url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-    sha256 = "1n45klvjvjjwbw9c4244jyzwfsz0dcvjwv3sc4nf88cm5y3pcraq";
-  }) { system = pkgs.system; };
+  essentialPackages = [
+    inputs.awww.packages.${pkgs.system}.awww # Flake for awww live wallpapers
+    pkgs._1password-gui
+    pkgs.gh
+    pkgs.git
+    pkgs.wl-clipboard
+    pkgs.xfce.thunar
+    pkgs.firefox
+    pkgs.hyprland
+    pkgs.waybar
+    pkgs.neovim
+    pkgs.rofi
+    pkgs.fastfetch
+    pkgs.grimblast # Screenshot tool
+    pkgs.magic-wormhole
+    pkgs.btop # Task Manager / System Resource Manager
+
+    # DE PKGS
+    pkgs.wayland # What Hyprland is built on
+    pkgs.hyprlock # Lockscreen for Hyprland
+    pkgs.hypridle # Idle Manager for Hyprland
+    pkgs.hyprpicker # Color Picker for Hyprland
+    pkgs.hypridle # Hyprland Idle Daemon
+
+    # Notification PKGS
+    pkgs.swaynotificationcenter # A Notification Center with GUI
+    pkgs.brightnessctl # Brightness Manager (SwayNC needs this)
+    pkgs.pamixer # SwayNC needs this
+  ];
 in
 {
   imports = [
+    ./school.nix
+    ./gaming.nix
   ];
+
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -26,35 +53,9 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    inputs.awww.packages.${pkgs.system}.awww 		# Flake for awww live wallpapers
-    pkgs.vesktop
-  	pkgs.rofi
-    pkgs.neovim
-    pkgs.obsidian
-    pkgs.spotify
-    pkgs.steam
-    pkgs.fastfetch
-    pkgs.cargo
-    pkgs.firefox
-    pkgs.hyprland
-    pkgs.waybar
-    pkgs.git
-    pkgs.gh
-    pkgs.eclipses.eclipse-java
-    pkgs.go
-    pkgs.nodejs_24
-    (masterPkgs.gemini-cli)
-    pkgs.kicad
-    pkgs.obs-studio
-    pkgs.vlc
-    pkgs.magic-wormhole
-    pkgs.grimblast
-    pkgs.xfce.thunar
-    pkgs.logisim-evolution
-    pkgs.chromium
-    pkgs.ryubing
-    pkgs.wl-clipboard
-  ];
+    pkgs.git # always installed
+  ] ++ essentialPackages;
+
 
   home.file = {
     ".config/nvim" = {

@@ -15,7 +15,6 @@ return {
                 json = { "prettier" },
                 markdown = { "prettier" },
                 lua = { "stylua" },
-                rust = { "rustfmt", lsp_format = "fallback" },
                 python = { "isort", "black" },
                 go = { "gofumpt" },
             },

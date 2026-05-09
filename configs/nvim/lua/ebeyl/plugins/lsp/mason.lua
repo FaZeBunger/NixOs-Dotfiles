@@ -34,6 +34,7 @@ return {
 				"lua_ls",
 				"clangd",
 				"pyright",
+                "nixd",
 			},
 		})
 
@@ -41,7 +42,6 @@ return {
 			ensure_installed = {
 				"isort",
 				"black",
-				"rustfmt",
 				"pylint",
 			},
 		})
