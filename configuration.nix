@@ -1,38 +1,23 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, hostname, username, timezone, defaultLocale, ... }:
 {
   imports =
     [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # inputs.spicetify-nix.nixosModules.spicetify
+      ./hardware-configuration.nix # Include the results of the hardware scan.
+      ./modules/system/firewall.nix
+      ./modules/system/bluetooth.nix
+      ./modules/system/audio.nix
+      ./modules/system/fonts.nix
     ];
 
 
   # Allow Unfree Packages
   nixpkgs.config.allowUnfree = true;
-  virtualisation.waydroid.enable = true;
-
-  # NixOS Insecure Packages
   nixpkgs.config.permittedInsecurePackages = [
+    # NixOS Insecure Packages
   ];
-
-  # Unstable Packages
   nixpkgs.overlays = [
-    (self: super: { })
+    (self: super: { }) # Unstable Packages
   ];
-
-  networking.hosts = {
-    "127.0.0.1" = [ "homie.ai" ];
-  };
-
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 40 443 ];
-    allowedUDPPortRanges = [
-      { from = 4000; to = 4007; }
-      { from = 8000; to = 8010; }
-    ];
-  };
 
 
   # Bootloader. Make sure to configure it properly!
@@ -44,19 +29,13 @@
     "hid_quirks=0x04f3:0x413c:0x40" # vendor:product:HID_QUIRK_NOINPUT
   ];
 
+  time.timeZone = timezone;
+  i18n.defaultLocale = defaultLocale;
 
-  networking.hostName = "izanagi"; # Replace with your desired hostname
-  networking.networkmanager.enable = true;
-
-  time.timeZone = "America/Chicago"; # Replace with your timezone
-
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  users.users.ebeyl = {
+  users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" ]; # Enable 'sudo' for the user
     packages = with pkgs; [
-      # Add any essential packages you want to start with, like a terminal
       kitty
       neovim
       git
@@ -64,32 +43,6 @@
     ];
   };
 
-  # Enable sound
-  security.rtkit.enable = true;
-
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
-
-  services.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-    wireplumber = {
-      enable = true; # Ensure WirePlumber is enabled
-      extraConfig.bluetoothEnhancements = {
-        "monitor.bluez.properties" = {
-          "bluez5.enable-sbc-xq" = true;
-          "bluez5.enable-msbc" = false; # Often recommended to disable if having issues
-          "bluez5.enable-hw-volume" = true;
-          "bluez5.auto-connect" = [ "a2dp_sink" ];
-          "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
-        };
-      };
-    };
-  };
 
   # Select internationalisation properties.
   console = {
@@ -111,8 +64,6 @@
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
 
-  # Login Screen 
-  # TODO: Fix this, idk why it doesn't work rn
   services.greetd.enable = true;
   services.greetd.settings.default_session = {
     command = "Hyprland";
@@ -142,11 +93,6 @@
   programs.hyprland.xwayland.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  environment.sessionVariables = {
-    HTTP_PROXY = "";
-    HTTPS_PROXY = "";
-    NO_PROXY = "";
-  };
 
   environment.systemPackages = [
 
@@ -164,12 +110,6 @@
     pkgs.direnv
     pkgs.wireshark # Wireshark
 
-
-    # Bluetooth Support (UI and Libs)
-    pkgs.blueman # GTK Bluetooth Manager (SwayNC needs this)
-    pkgs.bluez # Linux Bluetooth Protocol Stack
-    pkgs.bluez-alsa # Bluz Alsa Backend
-    pkgs.bluez-tools # Tools to manage bluetooth devices
 
     # Media and Audio PGKS
     pkgs.pavucontrol # Audio Mixer and Controller
@@ -192,22 +132,11 @@
   ];
 
 
-  fonts.fontconfig.enable = true;
-  fonts.packages = [
-    pkgs.pkgs.jetbrains-mono
-    pkgs.pkgs.fira-code
-    pkgs.pkgs.font-awesome
-    pkgs.pkgs.cascadia-code
-    pkgs.pkgs.jetbrains-mono
-    pkgs.pkgs.material-design-icons
-    pkgs.pkgs.mononoki
-    pkgs.pkgs.noto-fonts-cjk-sans
-  ];
 
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = [ "ebeyl" ];
+    polkitPolicyOwners = [ username ];
   };
 
   programs.steam = {
@@ -218,7 +147,6 @@
   };
 
   programs.wireshark.enable = true;
-
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc

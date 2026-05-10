@@ -1,5 +1,5 @@
 {
-  description = "My Nixos Config Flake";
+  description = "Flake of Ethan Beyl";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -11,22 +11,44 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, /* spicetify-nix,*/ ... }@inputs: {
-    # Allow unfree packages
-    nixpkgs.config.allowUnfree = true;
-    nixosConfigurations.izanagi = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useUserPackages = true;
-          home-manager.useGlobalPkgs = true;
-          home-manager.users.ebeyl = { imports = [ ./home.nix ]; };
-          home-manager.extraSpecialArgs = { inherit inputs; };
-        }
-      ];
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+    let
+      name = "Ethan Beyl";
+      username = "ebeyl";
+      hostname = "izanagi";
+      timezone = "America/Chicago";
+      defaultLocale = "en_US.UTF-8";
+      email = "ethan.j.beyl-1@ou.edu";
+    in
+    {
+
+      # Allow unfree packages
+      nixpkgs.config.allowUnfree = true;
+
+      nixosConfigurations.izanagi = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+          inherit hostname;
+          inherit timezone;
+          inherit defaultLocale;
+          inherit username;
+        };
+
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useUserPackages = true;
+            home-manager.useGlobalPkgs = true;
+            home-manager.users.ebeyl = { imports = [ ./home.nix ]; };
+
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              inherit username;
+            };
+          }
+        ];
+      };
     };
-  };
 }
