@@ -9,6 +9,20 @@
       ./modules/system/fonts.nix
     ];
 
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable udisks2 for USB drives
+  services.udisks2.enable = true;
+
+
+  # Enable drivers - Example for HP
+  services.printing.drivers = [ pkgs.hplipWithPlugin ];
+  services.avahi.nssmdns4 = true;
+
+  # Enable network discovery
+  services.avahi.enable = true;
+  services.avahi.openFirewall = true;
 
   # Allow Unfree Packages
   nixpkgs.config.allowUnfree = true;
@@ -98,7 +112,6 @@
 
     # Nix PKGS
     pkgs.kitty # Default Hyprland terminal
-    pkgs.starship # Terminal Prompt Manager ( May or may not use )
     pkgs.inotify-tools # Watching for file changes etc...
     pkgs.gnumake # Adds make for building C files
     pkgs.gcc # C compiler

@@ -4,6 +4,7 @@
     ./modules/user/school.nix
     ./modules/user/gaming.nix
     ./modules/user/essentials.nix
+    ./modules/user/capacities.nix
   ];
 
 
@@ -34,9 +35,8 @@
     ".config/waybar".source = ./configs/waybar;
     ".config/rofi".source = ./configs/rofi;
     ".config/swaync".source = ./configs/swaync;
+    ".config/starship".source = ./configs/starship;
   };
-
-
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release introduces backwards incompatible changes.

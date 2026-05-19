@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, config, ... }:
 let
   masterPkgs = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
   programmingPkgs = [
@@ -12,6 +12,7 @@ let
     pkgs.protonvpn-gui
     pkgs.python3 # Python
     pkgs.python312Packages.pip # Python Pip
+    pkgs.starship # Terminal Prompt Manager ( May or may not use )
   ];
 
   schoolPkgs = [
@@ -25,4 +26,22 @@ in
 {
   home.packages = [
   ] ++ programmingPkgs ++ schoolPkgs;
+
+  programs.starship = {
+    enable = true;
+    settings = {
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      enableFishIntegration = true;
+    };
+  };
+
+  programs.kitty = {
+    enable = true;
+    font = {
+      name = "JetBrains Mono NF";
+      size = 13;
+    };
+  };
+
 }
