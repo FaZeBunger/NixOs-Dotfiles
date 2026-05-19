@@ -9,6 +9,11 @@
       ./modules/system/fonts.nix
     ];
 
+  hardware.nvidia.open = true;
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -29,6 +34,7 @@
   nixpkgs.config.permittedInsecurePackages = [
     # NixOS Insecure Packages
   ];
+
   nixpkgs.overlays = [
     (self: super: { }) # Unstable Packages
   ];
@@ -39,9 +45,6 @@
 
   # Linux Kernel Version
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [
-    "hid_quirks=0x04f3:0x413c:0x40" # vendor:product:HID_QUIRK_NOINPUT
-  ];
 
   time.timeZone = timezone;
   i18n.defaultLocale = defaultLocale;
@@ -95,10 +98,6 @@
     unitConfig = {
       PartOf = "graphical-session.target";
     };
-  };
-
-  services.udev = {
-    extraRules = '' SUBSYSTEMS=="hid", KERNELS=="0018:04F3:413C.0001", DRIVERS=="hid-multitouch", ENV{LIBINPUT_IGNORE_DEVICE}="1" '';
   };
 
 

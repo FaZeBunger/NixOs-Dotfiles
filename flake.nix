@@ -15,7 +15,7 @@
     let
       name = "Ethan Beyl";
       username = "ebeyl";
-      hostname = "izanagi";
+      hostname = "susanoo";
       timezone = "America/Chicago";
       defaultLocale = "en_US.UTF-8";
       email = "ethan.j.beyl-1@ou.edu";
