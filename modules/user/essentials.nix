@@ -26,6 +26,8 @@
     pkgs.hypridle # Idle Manager for Hyprland
     pkgs.hyprpicker # Color Picker for Hyprland
     pkgs.hypridle # Hyprland Idle Daemon
+    pkgs.hyprpaper # Hyprland Wallpaper Daemon
+    pkgs.rose-pine-cursor # Mouse Cursor 
 
     # Notification PKGS
     pkgs.swaynotificationcenter # A Notification Center with GUI

@@ -9,10 +9,28 @@
       ./modules/system/fonts.nix
     ];
 
+  # Mount Other Drives
+    fileSystems."/mnt/ssd1" = {
+    device = "/dev/disk/by-uuid/A2A0C284A0C25E83";
+    fsType = "ntfs-3g";
+    options = [ "rw" "uid=1000" "gid=100" "exec" "umask=000"];
+  };
+
+  fileSystems."/mnt/hdd1" = {
+    device = "/dev/disk/by-uuid/AEEE26E5EE26A615";
+    fsType = "ntfs-3g";
+    options = [ "rw" "uid=1000" "gid=100" "exec" "umask=000"];
+  };
+
+  # Install NVIDIA Drivers
   hardware.nvidia.open = true;
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
+
+  # Enable ClamAV AntiVirus
+  services.clamav.daemon.enable = true;
+  services.clamav.updater.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -20,6 +38,8 @@
   # Enable udisks2 for USB drives
   services.udisks2.enable = true;
 
+  # Enable ratbagd for mouse control
+  services.ratbagd.enable = true;
 
   # Enable drivers - Example for HP
   services.printing.drivers = [ pkgs.hplipWithPlugin ];
@@ -121,6 +141,7 @@
     pkgs.unrar # Unrar
     pkgs.direnv
     pkgs.wireshark # Wireshark
+    pkgs.clamav    # OpenSource AntiVirus
 
 
     # Media and Audio PGKS

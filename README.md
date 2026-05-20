@@ -4,3 +4,4 @@
 - [X]  Make Rofi look better.
 - [ ] Set up KDE Connect
 - [ ] Set up starship
+- [ ] Remove AWWW if stylix works better

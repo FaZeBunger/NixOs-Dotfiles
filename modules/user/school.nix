@@ -38,10 +38,6 @@ in
 
   programs.kitty = {
     enable = true;
-    font = {
-      name = "JetBrains Mono NF";
-      size = 13;
-    };
   };
 
 }
