@@ -19,6 +19,7 @@
     pkgs.qdirstat # WinDirStat for Linux
     pkgs.ffmpeg
     pkgs.udiskie # Mounting / Reading / Writing to USB drives
+    pkgs.imhex   # Hex Editor
 
     # DE PKGS
     pkgs.wayland # What Hyprland is built on

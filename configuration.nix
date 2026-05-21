@@ -7,6 +7,7 @@
       ./modules/system/bluetooth.nix
       ./modules/system/audio.nix
       ./modules/system/fonts.nix
+      ./modules/system/virtualization.nix
     ];
 
   # Mount Other Drives
@@ -22,11 +23,16 @@
     options = [ "rw" "uid=1000" "gid=100" "exec" "umask=000"];
   };
 
+
   # Install NVIDIA Drivers
   hardware.nvidia.open = true;
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = true;
+  };
 
   # Enable ClamAV AntiVirus
   services.clamav.daemon.enable = true;

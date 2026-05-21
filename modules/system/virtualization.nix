@@ -1,0 +1,28 @@
+{config, pkgs, ...}:
+{
+  # Enable IOMMU and virtualization kernel modules
+  boot.kernelParams = [ "amd_iommu=on" "iommu=pt" ];
+  boot.kernelModules = [ "kvm-amd" "vfio_pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ];
+
+  # Enable libvirt and virt-manager
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+    };
+  };
+  programs.virt-manager.enable = true;
+
+  # Add your user to the libvirtd group
+  users.users.ebeyl.extraGroups = [ "libvirtd" "kvm" ];
+
+
+  systemd.tmpfiles.rules = [
+    "L+ /var/lib/libvirt/hooks/qemu - - - - /etc/nixos/qemu-hook.sh"
+  ];
+
+  # Add GPU rom to nixos and copy it to /etc/vgabios/rtx3060.rom
+  environment.etc."vgabios/rtx3060.rom".source = ../../roms/rtx3060_patched.rom;
+}
