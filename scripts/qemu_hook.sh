@@ -10,9 +10,6 @@ echo "Date: $(date)"
 GUEST_NAME="$1"
 OPERATION="$2"
 
-MOUSE="/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse"
-KEYBOARD="/dev/input/by-id/usb-0c45_2.4G_Dongle-event-kbd"
-
 echo "Guest: $GUEST_NAME | Operation: $OPERATION"
 
 if [ "$GUEST_NAME" == "win11" ]; then
@@ -32,9 +29,9 @@ if [ "$GUEST_NAME" == "win11" ]; then
     echo "Loading VFIO drivers..."
     modprobe vfio-pci
 
-    echo "Hooking Mouse and Keyboard"
-    virsh qemu-monitor-command "$GUEST_NAME" --hmp "object_add input-linux,id=mouse1,evdev=$MOUSE"
-    virsh qemu-monitor-command "$GUEST_NAME" --hmp "object_add input-linux,id=kbd1,evdev=$KEYBOARD,grab_all=on,repeat=on"
+    echo "Unmounting drives"
+    unmount /mnt/hdd1
+    unmount /mnt/hdd1
 
     echo "Prepare phase complete."
 
@@ -47,10 +44,10 @@ if [ "$GUEST_NAME" == "win11" ]; then
     echo 1 > /sys/class/vtconsole/vtcon0/bind
     echo "efi-framebuffer.0" > /sys/bus/platform/drivers/efi-framebuffer/bind
 
-    echo "Releasing Mouse and Keyboard"
-    virsh qemu-monitor-command "$GUEST_NAME" --hmp "object_del mouse1"
-    virsh qemu-monitor-command "$GUEST_NAME" --hmp "object_del kbd1"
-    
+    echo "Mounting Drives"
+    mount /mnt/hdd1
+    mount /mnt/sdd1
+
     echo "Starting display manager..."
     systemctl start display-manager.service
     echo "Release phase complete."

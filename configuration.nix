@@ -35,8 +35,11 @@
   };
 
   # Enable ClamAV AntiVirus
-  services.clamav.daemon.enable = true;
-  services.clamav.updater.enable = true;
+  services.clamav = {
+    daemon.enable = true;
+    updater.enable = true;
+    fangfrisch.enable = true;
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

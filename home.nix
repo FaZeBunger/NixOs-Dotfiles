@@ -5,7 +5,8 @@
     ./modules/user/gaming.nix
     ./modules/user/essentials.nix
     ./modules/user/capacities.nix
-    ./modules/user/stylix.nix
+    # ./modules/user/stylix.nix Removed for now
+    ./modules/user/linux-wallpaperengine.nix
   ];
 
 
