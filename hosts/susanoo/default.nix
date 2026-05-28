@@ -8,6 +8,31 @@
 
   networking.hostName = "susanoo";
 
+  #Mount Other Drives
+  fileSystems."/mnt/ssd1" = {
+    device = "/dev/disk/by-uuid/A2A0C284A0C25E83";
+    fsType = "ntfs3";
+    options = [ "rw" 
+                "uid=1000" 
+                "gid=100" 
+                "dmask=022"
+                "fmask=022"
+                "exec" 
+              ];
+  };
+
+  fileSystems."/mnt/hdd1" = {
+     device = "/dev/disk/by-uuid/AEEE26E5EE26A615";
+     fsType = "ntfs3";
+     options = [ "rw" 
+                "uid=1000" 
+                "gid=100" 
+                "dmask=022"
+                "fmask=022"
+                "exec" 
+              ];
+  };
+
   # Enable NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
 
