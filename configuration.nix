@@ -10,17 +10,29 @@
       ./modules/system/virtualization.nix
     ];
 
-  # Mount Other Drives
-    fileSystems."/mnt/ssd1" = {
+  #Mount Other Drives
+  fileSystems."/mnt/ssd1" = {
     device = "/dev/disk/by-uuid/A2A0C284A0C25E83";
-    fsType = "ntfs-3g";
-    options = [ "rw" "uid=1000" "gid=100" "exec" "umask=000"];
+    fsType = "ntfs3";
+    options = [ "rw" 
+                "uid=1000" 
+                "gid=100" 
+                "dmask=022"
+                "fmask=022"
+                "exec" 
+              ];
   };
 
   fileSystems."/mnt/hdd1" = {
-    device = "/dev/disk/by-uuid/AEEE26E5EE26A615";
-    fsType = "ntfs-3g";
-    options = [ "rw" "uid=1000" "gid=100" "exec" "umask=000"];
+     device = "/dev/disk/by-uuid/AEEE26E5EE26A615";
+     fsType = "ntfs3";
+     options = [ "rw" 
+                "uid=1000" 
+                "gid=100" 
+                "dmask=022"
+                "fmask=022"
+                "exec" 
+              ];
   };
 
 
@@ -72,8 +84,13 @@
   # Bootloader. Make sure to configure it properly!
   boot.loader.systemd-boot.enable = true;
 
+  # Make sure drivers for NTFS drives are always loaded on boot
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # Linux Kernel Version
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  boot.extraModprobeConfig = "options kvm_amd nested=1";
 
   time.timeZone = timezone;
   i18n.defaultLocale = defaultLocale;
@@ -151,7 +168,8 @@
     pkgs.direnv
     pkgs.wireshark # Wireshark
     pkgs.clamav    # OpenSource AntiVirus
-
+    pkgs.neovim 
+    pkgs.ntfs3g
 
     # Media and Audio PGKS
     pkgs.pavucontrol # Audio Mixer and Controller
