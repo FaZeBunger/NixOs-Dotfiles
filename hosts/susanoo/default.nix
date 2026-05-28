@@ -8,7 +8,7 @@
 
   networking.hostName = "susanoo";
 
-  # Mount two drives 
+  #Mount Other Drives
   fileSystems."/mnt/ssd1" = {
     device = "/dev/disk/by-uuid/A2A0C284A0C25E83";
     fsType = "ntfs3";
