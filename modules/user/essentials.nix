@@ -20,6 +20,8 @@
     pkgs.ffmpeg
     pkgs.udiskie # Mounting / Reading / Writing to USB drives
 
+    pkgs.remmina # RDP Client
+
     # DE PKGS
     pkgs.wayland # What Hyprland is built on
     pkgs.hyprlock # Lockscreen for Hyprland
