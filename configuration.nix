@@ -139,12 +139,12 @@
     pkgs.cacert
 
     # Raylib Dependencies
-    pkgs.xorg.libX11.dev
-    pkgs.xorg.libXcursor.dev
-    pkgs.xorg.libXrandr.dev
-    pkgs.xorg.libXi.dev
-    pkgs.xorg.libXinerama.dev
-    pkgs.xorg.libXfixes.dev
+    pkgs.libX11.dev
+    pkgs.libXcursor.dev
+    pkgs.libXrandr.dev
+    pkgs.libXi.dev
+    pkgs.libXinerama.dev
+    pkgs.libXfixes.dev
 
     # ...
   ];
