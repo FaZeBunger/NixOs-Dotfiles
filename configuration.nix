@@ -41,6 +41,7 @@
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
+
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = true;
@@ -80,6 +81,9 @@
     (self: super: { }) # Unstable Packages
   ];
 
+  nix.settings = {
+    download-buffer-size = 524288000; # 500 MB
+  };
 
   # Bootloader. Make sure to configure it properly!
   boot.loader.systemd-boot.enable = true;

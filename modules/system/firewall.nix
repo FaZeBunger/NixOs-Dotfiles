@@ -4,7 +4,7 @@
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 40 443 ];
+      allowedTCPPorts = [ 40 443 11434 42069 ];
       allowedUDPPortRanges = [
         { from = 4000; to = 4007; }
         { from = 8000; to = 8010; }

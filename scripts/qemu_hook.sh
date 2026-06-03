@@ -23,7 +23,15 @@ if [ "$GUEST_NAME" == "win11" ]; then
     echo "Unbinding console and unloading NVIDIA drivers..."
     echo 0 > /sys/class/vtconsole/vtcon0/bind
     echo 0 > /sys/class/vtconsole/vtcon1/bind
-    echo "efi-framebuffer.0" > /sys/bus/platform/drivers/efi-framebuffer/unbind
+
+    if test -e "/sys/bus/platform/drivers/simple-framebuffer/simple-framebuffer.0"; then 
+        echo "simple-framebuffer.0" > /sys/bus/platform/drivers/simple-framebuffer/unbind
+    fi
+
+    if test -e "/sys/bus/platform/drivers/efi-framebuffer/efi-framebuffer.0"; then 
+        echo "efi-framebuffer.0" > /sys/bus/platform/drivers/simple-framebuffer/unbind
+    fi
+
     modprobe -r nvidia_drm nvidia_modeset nvidia_uvm nvidia
     
     echo "Loading VFIO drivers..."

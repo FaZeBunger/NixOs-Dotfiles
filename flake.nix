@@ -15,25 +15,32 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, nixpkgs-unstable, ... }@inputs:
     let
+      system = "x86_64-linux";
       name = "Ethan Beyl";
       username = "ebeyl";
       hostname = "susanoo";
       timezone = "America/Chicago";
       defaultLocale = "en_US.UTF-8";
       email = "ethan.j.beyl-1@ou.edu";
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in
     {
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         specialArgs = {
           inherit inputs;
           inherit hostname;
           inherit timezone;
           inherit defaultLocale;
           inherit username;
+          inherit unstable;
         };
+
 
         modules = [
           ./configuration.nix
@@ -52,6 +59,7 @@
             home-manager.extraSpecialArgs = {
               inherit inputs;
               inherit username;
+              inherit unstable;
             };
           }
         ];
