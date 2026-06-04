@@ -26,6 +26,8 @@
     pkgs.udiskie # Mounting / Reading / Writing to USB drives
     pkgs.imhex   # Hex Editor
 
+    pkgs.remmina # RDP Client
+
     # DE PKGS
     pkgs.wayland # What Hyprland is built on
     pkgs.hyprlock # Lockscreen for Hyprland

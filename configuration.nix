@@ -10,37 +10,8 @@
       ./modules/system/virtualization.nix
     ];
 
-  #Mount Other Drives
-  fileSystems."/mnt/ssd1" = {
-    device = "/dev/disk/by-uuid/A2A0C284A0C25E83";
-    fsType = "ntfs3";
-    options = [ "rw" 
-                "uid=1000" 
-                "gid=100" 
-                "dmask=022"
-                "fmask=022"
-                "exec" 
-              ];
-  };
-
-  fileSystems."/mnt/hdd1" = {
-     device = "/dev/disk/by-uuid/AEEE26E5EE26A615";
-     fsType = "ntfs3";
-     options = [ "rw" 
-                "uid=1000" 
-                "gid=100" 
-                "dmask=022"
-                "fmask=022"
-                "exec" 
-              ];
-  };
-
-
-  # Install NVIDIA Drivers
-  hardware.nvidia.open = true;
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-
+  # Enable Docker
+  virtualisation.docker.enable = true;
 
   services.openssh = {
     enable = true;
@@ -185,12 +156,12 @@
     pkgs.cacert
 
     # Raylib Dependencies
-    pkgs.xorg.libX11.dev
-    pkgs.xorg.libXcursor.dev
-    pkgs.xorg.libXrandr.dev
-    pkgs.xorg.libXi.dev
-    pkgs.xorg.libXinerama.dev
-    pkgs.xorg.libXfixes.dev
+    pkgs.libX11.dev
+    pkgs.libXcursor.dev
+    pkgs.libXrandr.dev
+    pkgs.libXi.dev
+    pkgs.libXinerama.dev
+    pkgs.libXfixes.dev
 
     # ...
   ];
