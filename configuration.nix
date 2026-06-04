@@ -7,6 +7,7 @@
       ./modules/system/bluetooth.nix
       ./modules/system/audio.nix
       ./modules/system/fonts.nix
+      ./modules/system/virtualization.nix
     ];
 
   # Enable Docker
@@ -17,12 +18,21 @@
     settings.PasswordAuthentication = true;
   };
 
+  # Enable ClamAV AntiVirus
+  services.clamav = {
+    daemon.enable = true;
+    updater.enable = true;
+    fangfrisch.enable = true;
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
   # Enable udisks2 for USB drives
   services.udisks2.enable = true;
 
+  # Enable ratbagd for mouse control
+  services.ratbagd.enable = true;
 
   # Enable drivers - Example for HP
   services.printing.drivers = [ pkgs.hplipWithPlugin ];
@@ -37,19 +47,25 @@
   nixpkgs.config.permittedInsecurePackages = [
     # NixOS Insecure Packages
   ];
+
   nixpkgs.overlays = [
     (self: super: { }) # Unstable Packages
   ];
 
+  nix.settings = {
+    download-buffer-size = 524288000; # 500 MB
+  };
 
   # Bootloader. Make sure to configure it properly!
   boot.loader.systemd-boot.enable = true;
 
+  # Make sure drivers for NTFS drives are always loaded on boot
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # Linux Kernel Version
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [
-    "hid_quirks=0x04f3:0x413c:0x40" # vendor:product:HID_QUIRK_NOINPUT
-  ];
+
+  boot.extraModprobeConfig = "options kvm_amd nested=1";
 
   time.timeZone = timezone;
   i18n.defaultLocale = defaultLocale;
@@ -105,10 +121,6 @@
     };
   };
 
-  services.udev = {
-    extraRules = '' SUBSYSTEMS=="hid", KERNELS=="0018:04F3:413C.0001", DRIVERS=="hid-multitouch", ENV{LIBINPUT_IGNORE_DEVICE}="1" '';
-  };
-
 
   # Enable xWayland apps to work
   programs.hyprland.enable = true;
@@ -130,7 +142,9 @@
     pkgs.unrar # Unrar
     pkgs.direnv
     pkgs.wireshark # Wireshark
-
+    pkgs.clamav    # OpenSource AntiVirus
+    pkgs.neovim 
+    pkgs.ntfs3g
 
     # Media and Audio PGKS
     pkgs.pavucontrol # Audio Mixer and Controller
@@ -178,5 +192,5 @@
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s recommended to leave this value at
   # the version of NixOS you installed.
-  system.stateVersion = "25.05"; # Replace with your NixOS version (e.g., 23.11)
+  system.stateVersion = "25.11"; # Replace with your NixOS version (e.g., 23.11)
 }

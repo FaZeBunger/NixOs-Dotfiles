@@ -15,10 +15,16 @@
     pkgs.fastfetch
     pkgs.grimblast # Screenshot tool
     pkgs.magic-wormhole
-    pkgs.btop # Task Manager / System Resource Manager
+    (pkgs.btop.overrideAttrs (oldAttrs: {
+      nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
+      postInstall = (oldAttrs.postInstall or "") + ''
+        wrapProgram $out/bin/btop --prefix LD_LIBRARY_PATH : /run/opengl-driver/lib
+      '';
+    })) # Task Manager / System Resource Manager
     pkgs.qdirstat # WinDirStat for Linux
     pkgs.ffmpeg
     pkgs.udiskie # Mounting / Reading / Writing to USB drives
+    pkgs.imhex   # Hex Editor
 
     pkgs.remmina # RDP Client
 
@@ -28,6 +34,8 @@
     pkgs.hypridle # Idle Manager for Hyprland
     pkgs.hyprpicker # Color Picker for Hyprland
     pkgs.hypridle # Hyprland Idle Daemon
+    pkgs.hyprpaper # Hyprland Wallpaper Daemon
+    pkgs.rose-pine-cursor # Mouse Cursor 
 
     # Notification PKGS
     pkgs.swaynotificationcenter # A Notification Center with GUI

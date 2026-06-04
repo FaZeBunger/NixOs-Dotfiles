@@ -5,6 +5,8 @@
     ./modules/user/gaming.nix
     ./modules/user/essentials.nix
     ./modules/user/capacities.nix
+    ./modules/user/stylix.nix 
+    ./modules/user/assistant.nix
   ];
 
 
@@ -28,14 +30,29 @@
     ".config/nvim" = {
       # Neovim must be able to modify the config files thus 
       # we cannot use symlinks to the NixStore as it would be immutable
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/configs/nvim";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/configs/nvim";
       recursive = true;
     };
-    ".config/hypr".source = ./configs/hypr;
-    ".config/waybar".source = ./configs/waybar;
-    ".config/rofi".source = ./configs/rofi;
-    ".config/swaync".source = ./configs/swaync;
-    ".config/starship".source = ./configs/starship;
+    ".config/hypr" = {
+      source = ./configs/hypr;
+      recursive = true;
+    };
+    ".config/waybar" = {
+      source = ./configs/waybar;
+      recursive = true;
+    };
+    ".config/rofi" = {
+      source = ./configs/rofi;
+      recursive = true;
+    };
+    ".config/swaync" = {
+      source = ./configs/swaync;
+      recursive = true;
+    };
+    ".config/starship" = {
+      source = ./configs/starship;
+      recursive = true;
+    };
   };
 
   # This value determines the Home Manager release that your configuration is
@@ -44,6 +61,5 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
-
+  home.stateVersion = "25.11"; # Please read the comment before changing.
 }
