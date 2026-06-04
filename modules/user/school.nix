@@ -28,8 +28,17 @@ in
 
   programs.lazygit = {
     enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;   
     package = pkgs.lazygit;
-    settings = { };
+    settings = {
+      gui.showFileTree = true;
+      git.pagers = [
+        {
+          pager = "delta --dark --paging=never";
+        }
+      ];
+    };
   };
 
   programs.starship = {
