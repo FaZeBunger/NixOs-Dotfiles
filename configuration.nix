@@ -130,7 +130,9 @@
     pkgs.unrar # Unrar
     pkgs.direnv
     pkgs.wireshark # Wireshark
-
+    pkgs.clamav    # OpenSource AntiVirus
+    pkgs.neovim 
+    pkgs.ntfs3g
 
     # Media and Audio PGKS
     pkgs.pavucontrol # Audio Mixer and Controller

@@ -1,12 +1,12 @@
 { pkgs, inputs, ... }:
 {
   home.packages = [
-    inputs.awww.packages.${pkgs.system}.awww # Flake for awww live wallpapers
+    inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Flake for awww live wallpapers
     pkgs._1password-gui
     pkgs.gh
     pkgs.git
     pkgs.wl-clipboard
-    pkgs.xfce.thunar
+    pkgs.thunar
     pkgs.firefox
     pkgs.hyprland
     pkgs.waybar
@@ -28,6 +28,8 @@
     pkgs.hypridle # Idle Manager for Hyprland
     pkgs.hyprpicker # Color Picker for Hyprland
     pkgs.hypridle # Hyprland Idle Daemon
+    pkgs.hyprpaper # Hyprland Wallpaper Daemon
+    pkgs.rose-pine-cursor # Mouse Cursor 
 
     # Notification PKGS
     pkgs.swaynotificationcenter # A Notification Center with GUI

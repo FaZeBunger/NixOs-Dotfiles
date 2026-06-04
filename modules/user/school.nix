@@ -1,15 +1,14 @@
-{ pkgs, inputs, config, ... }:
+{ pkgs, inputs, config, unstable, ... }:
 let
-  masterPkgs = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
   programmingPkgs = [
     pkgs.cargo
     pkgs.eclipses.eclipse-java
     pkgs.go
     pkgs.nodejs_24
-    masterPkgs.gemini-cli
+    unstable.gemini-cli
     pkgs.logisim-evolution
     pkgs.kicad
-    pkgs.protonvpn-gui
+    pkgs.proton-vpn
     pkgs.python3 # Python
     pkgs.python312Packages.pip # Python Pip
     pkgs.starship # Terminal Prompt Manager ( May or may not use )
@@ -27,6 +26,21 @@ in
   home.packages = [
   ] ++ programmingPkgs ++ schoolPkgs;
 
+  programs.lazygit = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;   
+    package = pkgs.lazygit;
+    settings = {
+      gui.showFileTree = true;
+      git.pagers = [
+        {
+          pager = "delta --dark --paging=never";
+        }
+      ];
+    };
+  };
+
   programs.starship = {
     enable = true;
     settings = {
@@ -38,10 +52,6 @@ in
 
   programs.kitty = {
     enable = true;
-    font = {
-      name = "JetBrains Mono NF";
-      size = 13;
-    };
   };
 
 }
