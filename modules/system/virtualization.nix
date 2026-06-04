@@ -8,6 +8,11 @@
     enable = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    lazydocker
+    docker-compose
+  ];
+
   # Enable libvirt and virt-manager
   virtualisation.libvirtd = {
     enable = true;

@@ -1,12 +1,12 @@
 { pkgs, inputs, ... }:
 {
   home.packages = [
-    inputs.awww.packages.${pkgs.system}.awww # Flake for awww live wallpapers
+    inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Flake for awww live wallpapers
     pkgs._1password-gui
     pkgs.gh
     pkgs.git
     pkgs.wl-clipboard
-    pkgs.xfce.thunar
+    pkgs.thunar
     pkgs.firefox
     pkgs.hyprland
     pkgs.waybar
