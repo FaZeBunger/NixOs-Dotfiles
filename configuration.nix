@@ -9,6 +9,9 @@
       ./modules/system/fonts.nix
     ];
 
+  # Enable Docker
+  virtualisation.docker.enable = true;
+
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = true;
