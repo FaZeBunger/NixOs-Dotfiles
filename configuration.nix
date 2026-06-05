@@ -88,7 +88,7 @@
 
   services.greetd.enable = true;
   services.greetd.settings.default_session = {
-    command = "Hyprland";
+    command = "start-hyprland";
     user = "ebeyl";
   };
 
