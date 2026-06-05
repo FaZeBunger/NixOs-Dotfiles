@@ -7,6 +7,7 @@
       ./modules/system/bluetooth.nix
       ./modules/system/audio.nix
       ./modules/system/fonts.nix
+      ./modules/system/fish.nix
     ];
 
   # Enable Docker
