@@ -11,7 +11,6 @@ let
     pkgs.proton-vpn
     pkgs.python3 # Python
     pkgs.python312Packages.pip # Python Pip
-    pkgs.starship # Terminal Prompt Manager ( May or may not use )
   ];
 
   schoolPkgs = [
@@ -29,7 +28,8 @@ in
   programs.lazygit = {
     enable = true;
     enableBashIntegration = true;
-    enableZshIntegration = true;   
+    enableZshIntegration = true;
+    enableFishIntegration = true;
     package = pkgs.lazygit;
     settings = {
       gui.showFileTree = true;
@@ -38,15 +38,6 @@ in
           pager = "delta --dark --paging=never";
         }
       ];
-    };
-  };
-
-  programs.starship = {
-    enable = true;
-    settings = {
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-      enableFishIntegration = true;
     };
   };
 

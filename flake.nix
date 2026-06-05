@@ -20,7 +20,6 @@
       system = "x86_64-linux";
       name = "Ethan Beyl";
       username = "ebeyl";
-      hostname = "susanoo";
       timezone = "America/Chicago";
       defaultLocale = "en_US.UTF-8";
       email = "ethan.j.beyl-1@ou.edu";
@@ -30,39 +29,76 @@
       };
     in
     {
-      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          inherit hostname;
-          inherit timezone;
-          inherit defaultLocale;
-          inherit username;
-          inherit unstable;
+      nixosConfigurations = {
+        susanoo = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            hostname = "susanoo";
+            inherit timezone;
+            inherit defaultLocale;
+            inherit username;
+            inherit unstable;
+          };
+
+
+          modules = [
+            { nixpkgs.hostPlatform = system; }
+            ./hosts/susanoo/default.nix
+            stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useUserPackages = true;
+              home-manager.useGlobalPkgs = false;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.ebeyl = { 
+                imports = [ 
+                  ./hosts/susanoo/home.nix 
+                  inputs.stylix.homeModules.stylix
+                ]; 
+              };
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                inherit username;
+                inherit unstable;
+              };
+            }
+          ];
         };
 
+        izanagi = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            hostname = "izanagi";
+            inherit timezone;
+            inherit defaultLocale;
+            inherit username;
+            inherit unstable;
+          };
 
-        modules = [
-          { nixpkgs.hostPlatform = system; }
-          ./configuration.nix
-          stylix.nixosModules.stylix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useUserPackages = true;
-            home-manager.useGlobalPkgs = false;
-            home-manager.backupFileExtension = "backup";
-            home-manager.users.ebeyl = { 
-              imports = [ 
-                ./home.nix 
-                inputs.stylix.homeModules.stylix
-              ]; 
-            };
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-              inherit username;
-              inherit unstable;
-            };
-          }
-        ];
-      };
+
+          modules = [
+            { nixpkgs.hostPlatform = system; }
+            ./hosts/izanagi/default.nix
+            stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useUserPackages = true;
+              home-manager.useGlobalPkgs = false;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.ebeyl = { 
+                imports = [ 
+                  ./hosts/izanagi/home.nix 
+                  inputs.stylix.homeModules.stylix
+                ]; 
+              };
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                inherit username;
+                inherit unstable;
+              };
+            }
+          ];
+        };
     };
+  };
 }

@@ -2,12 +2,12 @@
 {
   imports =
     [
-      ./hardware-configuration.nix # Include the results of the hardware scan.
-      ./modules/system/firewall.nix
-      ./modules/system/bluetooth.nix
-      ./modules/system/audio.nix
-      ./modules/system/fonts.nix
-      ./modules/system/virtualization.nix
+      # Hardware configuration is handled per-host
+      ../../modules/system/firewall.nix
+      ../../modules/system/bluetooth.nix
+      ../../modules/system/audio.nix
+      ../../modules/system/fonts.nix
+      ../../modules/system/fish.nix
     ];
 
   # Enable Docker
@@ -88,23 +88,13 @@
     keyMap = "us";
   };
 
-  # Enable the X11 windowing system. You can remove this if you strictly want Wayland.
-  # services.xserver.enable = true;
-  # services.xserver.displayManager.lightdm.enable = true;
-  # services.xserver.desktopManager.xfce.enable = true; # Or your preferred desktop environment
-
-  # Enable the Sway window manager
-  # services.xserver.enable = true;
-  # services.xserver.displayManager.lightdm.enable = true;
-  # environment.systemPackages = with pkgs; [ sway ];
-
   # Enable the Wayland display server.
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
 
   services.greetd.enable = true;
   services.greetd.settings.default_session = {
-    command = "Hyprland";
+    command = "start-hyprland";
     user = "ebeyl";
   };
 
@@ -142,8 +132,8 @@
     pkgs.unrar # Unrar
     pkgs.direnv
     pkgs.wireshark # Wireshark
-    pkgs.clamav    # OpenSource AntiVirus
-    pkgs.neovim 
+    pkgs.clamav # OpenSource AntiVirus
+    pkgs.neovim
     pkgs.ntfs3g
 
     # Media and Audio PGKS
