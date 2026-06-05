@@ -3,7 +3,6 @@
   imports = [
     ../../modules/user/school.nix
     ../../modules/user/essentials.nix
-    ../../modules/user/capacities.nix
     ../../modules/user/stylix.nix
     ../../modules/user/fish.nix
   ];

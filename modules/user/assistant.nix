@@ -1,12 +1,12 @@
 {config, pkgs, inputs, unstable, ...}:
 {
-  services.ollama.enable = true;
-  services.ollama.acceleration = "cuda";
-  services.ollama.package = pkgs.ollama;
-  services.ollama.environmentVariables = {
-    OLLAMA_ORIGINS = "*";
-  }; 
-  services.ollama.host = "0.0.0.0";
+  # services.ollama.enable = true;
+  # services.ollama.acceleration = "cuda";
+  # services.ollama.package = pkgs.ollama;
+  # services.ollama.environmentVariables = {
+  #   OLLAMA_ORIGINS = "*";
+  # }; 
+  # services.ollama.host = "0.0.0.0";
 
   # services.llama-cpp = {
   #  package = ;
