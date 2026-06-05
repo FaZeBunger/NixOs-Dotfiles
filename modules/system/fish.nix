@@ -15,7 +15,15 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
+      starship init fish | source
     '';
   };
 
+  environment.systemPackages = [
+    pkgs.fishPlugins.grc
+    pkgs.fishPlugins.async-prompt
+    pkgs.fishPlugins.autopair
+    pkgs.fishPlugins.fzf-fish
+    pkgs.grc # Required for text coloring
+  ];
 }
