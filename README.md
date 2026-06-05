@@ -4,8 +4,9 @@
 - [X]  Make Rofi look better.
 - [ ] Set up KDE Connect
 - [ ] Set up starship
-- [ ] Remove AWWW if stylix works better
+- [X] Remove AWWW if stylix works better
 - [ ] Set up scan to run automatically
 - [ ] Add CPU usage tracker in waybar
-- [ ] Add Garbage Collection
-- [ ] Get drives to work in vm
+- [X] Add Garbage Collection
+- [X] Get drives to work in vm
+- [ ]

@@ -1,7 +1,6 @@
 { pkgs, inputs, ... }:
 {
   home.packages = [
-    inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Flake for awww live wallpapers
     pkgs._1password-gui
     pkgs.gh
     pkgs.git
