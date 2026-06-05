@@ -20,7 +20,7 @@
       system = "x86_64-linux";
       name = "Ethan Beyl";
       username = "ebeyl";
-      hostname = "susanoo";
+      hostname = "izanagi";
       timezone = "America/Chicago";
       defaultLocale = "en_US.UTF-8";
       email = "ethan.j.beyl-1@ou.edu";

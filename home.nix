@@ -5,8 +5,7 @@
     ./modules/user/gaming.nix
     ./modules/user/essentials.nix
     ./modules/user/capacities.nix
-    ./modules/user/stylix.nix 
-    ./modules/user/assistant.nix
+    ./modules/user/stylix.nix
   ];
 
 
@@ -18,6 +17,23 @@
   home.homeDirectory = "/home/" + username;
 
   programs.home-manager.enable = true;
+
+  programs.bash = {
+    interactiveShellInit = ''
+      # "check if parent process is not fish" && "make nested shells work properly"
+      if grep -qv fish /proc/$PPID/comm && [[ $SHLVL == [12] ]]; then
+          # set $SHELL for better integration with programs like nix shell, tmux, etc.
+          SHELL=${pkgs.fish}/bin/fish exec fish
+      fi
+    '';
+  };
+
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set fish_greeting # Disable greeting
+    '';
+  };
 
 
   # The home.packages option allows you to install Nix packages into your
@@ -32,7 +48,7 @@
     ".config/nvim" = {
       # Neovim must be able to modify the config files thus 
       # we cannot use symlinks to the NixStore as it would be immutable
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/configs/nvim";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/configs/nvim";
       recursive = true;
     };
     ".config/hypr" = {

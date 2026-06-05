@@ -29,7 +29,8 @@ in
   programs.lazygit = {
     enable = true;
     enableBashIntegration = true;
-    enableZshIntegration = true;   
+    enableZshIntegration = true;
+    enableFishIntegration = true;
     package = pkgs.lazygit;
     settings = {
       gui.showFileTree = true;
