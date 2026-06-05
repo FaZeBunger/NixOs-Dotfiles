@@ -15,12 +15,6 @@
     pkgs.fastfetch
     pkgs.grimblast # Screenshot tool
     pkgs.magic-wormhole
-    (pkgs.btop.overrideAttrs (oldAttrs: {
-      nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
-      postInstall = (oldAttrs.postInstall or "") + ''
-        wrapProgram $out/bin/btop --prefix LD_LIBRARY_PATH : /run/opengl-driver/lib
-      '';
-    })) # Task Manager / System Resource Manager
     pkgs.qdirstat # WinDirStat for Linux
     pkgs.ffmpeg
     pkgs.udiskie # Mounting / Reading / Writing to USB drives
