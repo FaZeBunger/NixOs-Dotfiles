@@ -157,6 +157,12 @@
   ];
 
 
+  programs.nh = {
+   enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep 10";
+    flake = "/home/user/my-nixos-config"; # sets NH_OS_FLAKE variable for you
+  };
 
   programs._1password.enable = true;
   programs._1password-gui = {
