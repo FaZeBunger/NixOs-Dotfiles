@@ -50,11 +50,11 @@
             home-manager.useUserPackages = true;
             home-manager.useGlobalPkgs = false;
             home-manager.backupFileExtension = "backup";
-            home-manager.users.ebeyl = { 
-              imports = [ 
-                ./home.nix 
+            home-manager.users.ebeyl = {
+              imports = [
+                ./home.nix
                 inputs.stylix.homeModules.stylix
-              ]; 
+              ];
             };
             home-manager.extraSpecialArgs = {
               inherit inputs;

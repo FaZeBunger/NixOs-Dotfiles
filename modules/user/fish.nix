@@ -10,6 +10,21 @@
       { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
       { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
     ];
+
+    binds = {
+      "\\t" = {
+        command = "accept-autosuggestion";
+        operate = "user";
+      };
+      "\\cj" = {
+        command = "down-or-search";
+        operate = "user";
+      };
+      "\\ck" = {
+        command = "up-or-search";
+        operate = "user";
+      };
+    };
   };
 
   programs.starship = {
