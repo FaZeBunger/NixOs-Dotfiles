@@ -13,13 +13,6 @@
   # Enable Docker
   virtualisation.docker.enable = true;
 
-
-
-  # Install NVIDIA Drivers
-  hardware.nvidia.open = true;
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = true;

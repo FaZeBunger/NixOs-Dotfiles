@@ -18,6 +18,7 @@
     pkgs.ffmpeg
     pkgs.udiskie # Mounting / Reading / Writing to USB drives
     pkgs.imhex   # Hex Editor
+    pkgs.p7zip
 
     pkgs.remmina # RDP Client
 
