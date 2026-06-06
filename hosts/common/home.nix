@@ -23,7 +23,6 @@
   home.packages = [
   ];
 
-  home.sessionVariables = { };
 
   # Tells NixOS where to store the configs for programs managed by Nix
   home.file = {

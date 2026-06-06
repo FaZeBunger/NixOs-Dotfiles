@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.fish = {
     enable = true;
@@ -10,6 +10,10 @@
       { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
       { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
     ];
+
+    shellAliases = {
+      ll = "ls -la --color=auto";
+    };
 
     binds = {
       "\\t" = {
@@ -25,6 +29,10 @@
         operate = "user";
       };
     };
+  };
+
+  home.sessionVariables = { 
+    EDITOR = "nvim";
   };
 
   programs.starship = {
