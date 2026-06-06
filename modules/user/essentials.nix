@@ -4,6 +4,7 @@
     pkgs._1password-gui
     pkgs.gh
     pkgs.git
+    pkgs.delta # Git syntax highlighting pager
     pkgs.wl-clipboard
     pkgs.thunar
     pkgs.firefox
@@ -17,7 +18,7 @@
     pkgs.qdirstat # WinDirStat for Linux
     pkgs.ffmpeg
     pkgs.udiskie # Mounting / Reading / Writing to USB drives
-    pkgs.imhex   # Hex Editor
+    pkgs.imhex # Hex Editor
 
     pkgs.remmina # RDP Client
 

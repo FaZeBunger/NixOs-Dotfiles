@@ -2,7 +2,7 @@
 {
   imports = [
     ../common/system.nix
-    # ./hardware-configuration.nix # To be added later
+    ./hardware-configuration.nix
   ];
 
   networking.hostName = "izanagi";
