@@ -12,7 +12,8 @@
     pkgs.waybar
     pkgs.neovim
     pkgs.rofi
-    pkgs.fastfetch
+
+
     pkgs.grimblast # Screenshot tool
     pkgs.magic-wormhole
     pkgs.qdirstat # WinDirStat for Linux

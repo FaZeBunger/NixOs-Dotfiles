@@ -39,7 +39,6 @@
             inherit unstable;
           };
 
-
           modules = [
             { nixpkgs.hostPlatform = system; }
             ./hosts/susanoo/default.nix
