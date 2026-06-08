@@ -11,6 +11,7 @@
 
 (package! magit-todos)
 (package! git-gutter)
+(package! tldr)
 
 
 

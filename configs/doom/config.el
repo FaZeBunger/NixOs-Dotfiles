@@ -94,3 +94,4 @@
 (map! :leader
       :desc "Git stage hunk"
       "g s" #'git-gutter:stage-hunk)
+(setq confirm-kill-emacs nil)

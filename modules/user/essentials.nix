@@ -8,6 +8,7 @@
     pkgs.wl-clipboard
     pkgs.thunar
     pkgs.firefox
+    pkgs.vesktop
     pkgs.hyprland
     pkgs.waybar
     pkgs.neovim

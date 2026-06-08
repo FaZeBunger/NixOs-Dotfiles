@@ -2,12 +2,18 @@
 
   # Dependencies for emacs & doom emacs
   home.packages = with pkgs; [
+    # Core dependencies
     git
     emacs
     ripgrep
     coreutils
     fd
     clang
+
+    # LSP Packages
+    nixd
+    rust-analyzer
+    rustc
   ];
 
   home.sessionPath = [
@@ -15,7 +21,7 @@
   ];
 
   home.file = {
-    "./config/doom" = {
+    "./.config/doom" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/configs/doom";
       recursive = true;
     };

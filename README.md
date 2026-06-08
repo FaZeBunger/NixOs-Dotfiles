@@ -19,3 +19,4 @@ I do not recommend using my setup for personal use, but if you do I recommend th
 - TODO: Add CPU usage tracker in waybar
 - TODO: Configure starship to work with nix-shell and show custom prompt for it
 - TODO: Set up nix to track doom-emacs and config. It only technically works right now.
+- TODO: Fix unused variables and clean shit up
