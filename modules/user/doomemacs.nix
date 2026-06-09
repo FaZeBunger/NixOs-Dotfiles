@@ -14,6 +14,8 @@
     nixd
     rust-analyzer
     rustc
+    pyright
+    ruff
   ];
 
   home.sessionPath = [

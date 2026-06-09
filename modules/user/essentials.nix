@@ -13,7 +13,8 @@
     pkgs.waybar
     pkgs.neovim
     pkgs.rofi
-
+    pkgs.spotify
+    pkgs.steam
 
     pkgs.grimblast # Screenshot tool
     pkgs.magic-wormhole
