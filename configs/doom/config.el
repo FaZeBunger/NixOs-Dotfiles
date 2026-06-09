@@ -33,6 +33,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
+(setq doom-font (font-spec :family "JetBrainsMono NF" :size 14))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -95,3 +96,13 @@
       :desc "Git stage hunk"
       "g s" #'git-gutter:stage-hunk)
 (setq confirm-kill-emacs nil)
+
+
+;; Setup vshell and make it use fish
+
+;; Keep a POSIX shell for background Emacs subprocesses to prevent errors
+(setq shell-file-name (executable-find "bash"))
+
+;; Explicitly force interactive terminals (vterm) to use Fish shell
+(setq-default vterm-shell (executable-find "fish"))
+(setq-default explicit-shell-file-name (executable-find "fish"))

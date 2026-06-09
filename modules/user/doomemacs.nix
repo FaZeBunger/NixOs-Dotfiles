@@ -9,6 +9,8 @@
     coreutils
     fd
     clang
+    cmake  # Needed for the terminal in emacs
+    libtool # Needed to compile vterm
 
     # LSP Packages
     nixd
