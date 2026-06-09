@@ -18,6 +18,9 @@
     rustc
     pyright
     ruff
+
+    # Note taking shit
+    miktex  # Required packages for math in emacs + much more
   ];
 
   home.sessionPath = [
