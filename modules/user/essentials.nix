@@ -4,14 +4,18 @@
     pkgs._1password-gui
     pkgs.gh
     pkgs.git
+    pkgs.delta # Git syntax highlighting pager
     pkgs.wl-clipboard
     pkgs.thunar
     pkgs.firefox
+    pkgs.vesktop
     pkgs.hyprland
     pkgs.waybar
     pkgs.neovim
     pkgs.rofi
-    pkgs.fastfetch
+    pkgs.spotify
+    pkgs.steam
+
     pkgs.grimblast # Screenshot tool
     pkgs.magic-wormhole
     pkgs.qdirstat # WinDirStat for Linux

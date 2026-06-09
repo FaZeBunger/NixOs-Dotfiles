@@ -5,6 +5,7 @@
     ../../modules/user/essentials.nix
     ../../modules/user/stylix.nix
     ../../modules/user/fish.nix
+    ../../modules/user/doomemacs.nix
   ];
 
 
