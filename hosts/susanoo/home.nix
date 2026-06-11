@@ -4,6 +4,7 @@
     ../common/home.nix
     ../../modules/user/assistant.nix
     ../../modules/user/gaming.nix
+    ../../modules/user/unity.nix
   ];
 
   # Install BTOP with gpu support on desktop only

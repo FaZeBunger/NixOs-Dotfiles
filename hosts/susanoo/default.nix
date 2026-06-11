@@ -8,22 +8,22 @@
 
   networking.hostName = "susanoo";
 
-  #Mount Other Drives
+  # Mount Other Drives
   fileSystems."/mnt/ssd1" = {
-    device = "/dev/disk/by-uuid/A2A0C284A0C25E83";
-    fsType = "ntfs3";
-    options = [ "rw" 
-                "uid=1000" 
-                "gid=100" 
+    device = "/dev/disk/by-uuid/8A1ECEB11ECE961B";
+    fsType = "ntfs-3g";
+    options = [ "rw"
+                "uid=1000"
+                "gid=100"
                 "dmask=022"
                 "fmask=022"
-                "exec" 
+                "exec"
               ];
   };
 
   fileSystems."/mnt/hdd1" = {
      device = "/dev/disk/by-uuid/AEEE26E5EE26A615";
-     fsType = "ntfs3";
+     fsType = "ntfs-3g";
      options = [ "rw" 
                 "uid=1000" 
                 "gid=100" 
@@ -32,6 +32,17 @@
                 "exec" 
               ];
   };
+
+  zramSwap = {
+    enable = true;
+    priority = 100;
+    algorithm = "zstd";
+    memoryPercent = 25;
+  };
+
+  # Make sure hibernation is disabled. (Causes boot errors)
+  systemd.targets.hibernate.enable =  false;
+  systemd.targets.hybrid-sleep.enable =  false;
 
   # Enable NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
