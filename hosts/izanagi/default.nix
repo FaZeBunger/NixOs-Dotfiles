@@ -5,5 +5,7 @@
     ./hardware-configuration.nix
   ];
 
+  services.upower.enable = true;
+
   networking.hostName = "izanagi";
 }

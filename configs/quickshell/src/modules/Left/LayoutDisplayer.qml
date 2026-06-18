@@ -63,7 +63,7 @@ Item {
                     if (obj && obj.tiledLayout) {
                         root.currentLayout = obj.tiledLayout.toLowerCase()
                         root.numWindows = obj.windows > 0 ? obj.windows.toString() : "  "
-                    } 
+                    }
                 } catch (e) {
                     // malformed JSON — keep current value
                 }
@@ -107,7 +107,7 @@ Item {
     function cycleLayout(step) {
         let idx = availableLayouts.indexOf(root.currentLayout)
         if (idx === -1) idx = 0 // Fallback if unknown
-        
+
         // Calculate next index (handles negative steps for right-click)
         idx = (idx + step + availableLayouts.length) % availableLayouts.length
         let newLayout = availableLayouts[idx]
@@ -118,7 +118,7 @@ Item {
         } else {
             setLayoutProc.command = ["hyprctl", "keyword", "general:layout", newLayout]
         }
-        
+
         setLayoutProc.running = true
 
         // 2. Optimistically update the UI instantly (no waiting for IPC/Timer)
@@ -142,7 +142,7 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
             acceptedButtons: Qt.LeftButton | Qt.RightButton
-            
+
             onClicked: (mouse) => {
                 if (mouse.button === Qt.LeftButton) {
                     cycleLayout(1)  // Forward

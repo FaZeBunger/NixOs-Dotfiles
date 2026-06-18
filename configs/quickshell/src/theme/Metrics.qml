@@ -6,7 +6,7 @@ QtObject {
     property bool barEnabled: false
 
     // -- Bar Sizes --
-    property int borderWidth:   6
+    property int borderWidth:   0
     property int cornerRadius:  17
     property int notchRadius:   15
     property int notchHeight:   40
