@@ -13,6 +13,16 @@
 
     shellAliases = {
       ll = "ls -la --color=auto";
+      emacs = "emacsclient -c -n -a ''";
+      tmacs = "emacsclient -a ''";
+      reubuild = "sudo nixos-rebuild switch --flake /home/ebeyl/dotfiles.#";
+    };
+
+    functions = {
+      # This will rebuild the system and doom emacs any time a change has been made. If the rebuild fails doom won't sync
+      rebuild = ''
+        sudo nixos-rebuild switch --flake /home/ebeyl/.dotfiles/.#$argv[1] && ~/.config/emacs/bin/doom sync
+      '';
     };
 
     binds = {
@@ -32,7 +42,7 @@
   };
 
   home.sessionVariables = { 
-    EDITOR = "nvim";
+    EDITOR = "emacsclient -c -n -a ''";
   };
 
   programs.starship = {
