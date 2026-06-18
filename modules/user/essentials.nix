@@ -15,6 +15,7 @@
     pkgs.rofi
     pkgs.spotify
     pkgs.steam
+    pkgs.fastfetch
 
     pkgs.grimblast # Screenshot tool
     pkgs.magic-wormhole
