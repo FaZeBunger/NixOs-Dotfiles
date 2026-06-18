@@ -11,4 +11,8 @@
       recursive = true;
     };
   };
+
+  home.packages = [
+    pkgs.hyprsunset
+  ];
 }

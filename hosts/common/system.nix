@@ -102,18 +102,18 @@
     user = "ebeyl";
   };
 
-  systemd.user.services.swaync = {
-    enable = true;
-    description = "Sway Notification Center";
-    wantedBy = [ "graphical-session.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
-      Restart = "on-failure";
-    };
-    unitConfig = {
-      PartOf = "graphical-session.target";
-    };
-  };
+  # systemd.user.services.swaync = {
+  #   enable = true;
+  #   description = "Sway Notification Center";
+  #   wantedBy = [ "graphical-session.target" ];
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
+  #     Restart = "on-failure";
+  #   };
+  #   unitConfig = {
+  #     PartOf = "graphical-session.target";
+  #   };
+  # };
 
 
   # Enable xWayland apps to work
