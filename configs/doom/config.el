@@ -92,6 +92,27 @@
     '(git-gutter:deleted :foreground "red" :weight bold)
     '(git-gutter:modified :foreground "yellow" :weight bold)))
 
+;; Add Unity Mode to emacs for opening files with unity
+(straight-use-package
+ '(unity :type git :host github :repo "elizagamedev/unity.el"))
+(add-hook 'after-init-hook #'unity-mode)
+
+;; Used for adding Unity LPS suggestions
+(use-package lsp-mode
+  :ensure t
+  :bind-keymap
+  ("C-c l" . lsp-command-map)
+  :custom
+  (lsp-keymap-prefix "C-c l"))
+
+(use-package csharp-mode
+  :ensure t
+  :init
+  (defun my/csharp-mode-hook ()
+    (setq-local lsp-auto-guess-root t)
+    (lsp))
+  (add-hook 'csharp-mode-hook #'my/csharp-mode-hook))
+
 (map! :leader
       :desc "Git stage hunk"
       "g s" #'git-gutter:stage-hunk)

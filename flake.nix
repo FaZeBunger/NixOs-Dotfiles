@@ -14,7 +14,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, nixpkgs-unstable, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, stylix, ... }@inputs:
     let
       system = "x86_64-linux";
       name = "Ethan Beyl";

@@ -88,6 +88,10 @@
     keyMap = "us";
   };
 
+  # Enable locate service
+  services.locate.enable = true;
+  services.locate.locate = pkgs.plocate;
+
   # Enable the Wayland display server.
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
@@ -161,6 +165,7 @@
     config = {
       core.editor = "nvim";
     };
+    lfs.enable = true;
   };
 
   programs.nh = {

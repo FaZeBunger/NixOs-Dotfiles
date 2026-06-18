@@ -19,12 +19,18 @@
     pyright
     ruff
 
+    # Unity Packages for emacs support
+    omnisharp-roslyn  # LSP support for C# files
+    mono
+    dotnet-sdk
+
     # Note taking shit
     miktex  # Required packages for math in emacs + much more
   ];
 
   home.sessionPath = [
     "${config.home.homeDirectory}/.config/emacs/bin"
+    "${config.home.homeDirectory}/.cargo/bin"  # Needed to add rider2emacs to path so it can run for unity integration with emacs
   ];
 
   home.file = {

@@ -12,6 +12,7 @@ I do not recommend using my setup for personal use, but if you do I recommend th
 
 
 ---
+# TODOs 
 - TODO: Make SwayNC finally look nice.
 - TODO: Set up KDE Connect
 - TODO: Set up starship
@@ -21,3 +22,9 @@ I do not recommend using my setup for personal use, but if you do I recommend th
 - TODO: Set up nix to track doom-emacs and config. It only technically works right now.
 - TODO: Fix unused variables and clean shit up
 - TODO: Set up auto shutdown for desktop specifically.
+
+--- 
+
+# Requirements 
+`cargo install rider2emacs` for unity lsp support
+`cargo install matugen` for color themeing for quickshell

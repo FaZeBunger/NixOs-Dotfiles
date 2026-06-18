@@ -13,6 +13,25 @@
 (package! git-gutter)
 (package! tldr)
 
+;; Unity Integration Package
+(straight-use-package
+ '(unity :type git :host github :repo "elizagamedev/unity.el"))
+(add-hook 'after-init-hook #'unity-mode)
+
+
+;; Quickshell LSP support
+(use-package qml-ts-mode
+  :after lsp-mode
+  :config
+  (add-to-list 'lsp-language-id-configuration '(qml-ts-mode . "qml-ts"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("qmlls"))
+                    :activation-fn (lsp-activate-on "qml-ts")
+                    :server-id 'qmlls))
+  (add-hook 'qml-ts-mode-hook (lambda ()
+                                (setq-local electric-indent-chars '(?\n ?\( ?\) ?{ ?} ?\[ ?\] ?\; ?,))
+                                (lsp-deferred))))
+
 
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:

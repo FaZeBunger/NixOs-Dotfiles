@@ -6,6 +6,7 @@
     ../../modules/user/stylix.nix
     ../../modules/user/fish.nix
     ../../modules/user/doomemacs.nix
+    ../../modules/user/quickshell.nix
   ];
 
 
@@ -50,6 +51,10 @@
     };
     ".config/starship" = {
       source = ../../configs/starship;
+      recursive = true;
+    };
+    ".config/quickshell" = {
+      source = ../../configs/quickshell;
       recursive = true;
     };
   };
