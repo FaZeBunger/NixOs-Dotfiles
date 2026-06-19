@@ -12,9 +12,13 @@
       url = "github:nix-community/stylix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    antigravity = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, stylix, antigravity, ... }@inputs:
     let
       system = "x86_64-linux";
       name = "Ethan Beyl";
@@ -58,6 +62,7 @@
                 inherit inputs;
                 inherit username;
                 inherit unstable;
+                inherit antigravity;
               };
             }
           ];
@@ -93,6 +98,7 @@
                 inherit inputs;
                 inherit username;
                 inherit unstable;
+                inherit antigravity;
               };
             }
           ];

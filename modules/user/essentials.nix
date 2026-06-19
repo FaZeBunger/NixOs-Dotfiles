@@ -37,9 +37,9 @@
     pkgs.rose-pine-cursor # Mouse Cursor 
 
     # Notification PKGS
-    pkgs.swaynotificationcenter # A Notification Center with GUI
-    pkgs.brightnessctl # Brightness Manager (SwayNC needs this)
-    pkgs.pamixer # SwayNC needs this
+    # pkgs.swaynotificationcenter   # A Notification Center with GUI | REMOVED because quickshell has it's own notification stuff
+    pkgs.brightnessctl              # Brightness Manager (SwayNC needs this)
+    pkgs.pamixer                    # SwayNC needs this
   ];
 
 }

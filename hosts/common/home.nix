@@ -7,6 +7,7 @@
     ../../modules/user/fish.nix
     ../../modules/user/doomemacs.nix
     ../../modules/user/quickshell.nix
+    ../../modules/user/antigravity.nix
   ];
 
 

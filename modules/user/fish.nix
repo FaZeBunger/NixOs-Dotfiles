@@ -43,6 +43,7 @@
 
   home.sessionVariables = { 
     EDITOR = "emacsclient -c -n -a ''";
+    BROWSER = "firefox";
   };
 
   programs.starship = {
