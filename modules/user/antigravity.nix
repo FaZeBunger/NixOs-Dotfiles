@@ -12,7 +12,7 @@
   # 3. Install the Base App and CLI as standard packages
   home.packages = [
     antigravity.packages.${pkgs.system}.default  # Antigravity 2.0 Base App
-    # antigravity.packages.${pkgs.system}.agy      # The 'agy' CLI tool DISABLED
+    antigravity.packages.${pkgs.system}.google-antigravity-cli      # The 'agy' CLI tool
   ];
 
 }

@@ -8,6 +8,8 @@
     enable = true;
   };
 
+  # These packages are already installed elsewhere but keep them
+  # here because they are important for virtualization kinda... 🫠
   environment.systemPackages = with pkgs; [
     lazydocker
     docker-compose

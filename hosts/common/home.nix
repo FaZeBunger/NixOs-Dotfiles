@@ -8,6 +8,7 @@
     ../../modules/user/doomemacs.nix
     ../../modules/user/quickshell.nix
     ../../modules/user/antigravity.nix
+    ../../modules/user/programming.nix
   ];
 
 

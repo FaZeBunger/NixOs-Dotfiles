@@ -2,9 +2,6 @@
 {
   home.packages = [
     pkgs._1password-gui
-    pkgs.gh
-    pkgs.git
-    pkgs.delta # Git syntax highlighting pager
     pkgs.wl-clipboard
     pkgs.thunar
     pkgs.firefox
@@ -34,7 +31,8 @@
     pkgs.hyprpicker # Color Picker for Hyprland
     pkgs.hypridle # Hyprland Idle Daemon
     pkgs.hyprpaper # Hyprland Wallpaper Daemon
-    pkgs.rose-pine-cursor # Mouse Cursor 
+    pkgs.rose-pine-cursor # Mouse Cursor
+    pkgs.cava # Audio Visualizer
 
     # Notification PKGS
     # pkgs.swaynotificationcenter   # A Notification Center with GUI | REMOVED because quickshell has it's own notification stuff
@@ -42,4 +40,8 @@
     pkgs.pamixer                    # SwayNC needs this
   ];
 
+  # REQUIRED BY DEFAULT FOR HYPRLAND
+  programs.kitty = {
+    enable = true;
+  };
 }

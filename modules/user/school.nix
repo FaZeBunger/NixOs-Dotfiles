@@ -1,17 +1,5 @@
 { pkgs, inputs, config, unstable, ... }:
 let
-  programmingPkgs = [
-    pkgs.cargo
-    pkgs.eclipses.eclipse-java
-    pkgs.go
-    pkgs.nodejs_24
-    unstable.gemini-cli
-    pkgs.logisim-evolution
-    pkgs.kicad
-    pkgs.proton-vpn
-    pkgs.python3 # Python
-    pkgs.python312Packages.pip # Python Pip
-  ];
 
   schoolPkgs = [
     pkgs.vlc
@@ -23,26 +11,5 @@ let
 in
 {
   home.packages = [
-  ] ++ programmingPkgs ++ schoolPkgs;
-
-  programs.lazygit = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    enableFishIntegration = true;
-    package = pkgs.lazygit;
-    settings = {
-      gui.showFileTree = true;
-      git.pagers = [
-        {
-          pager = "delta --dark --paging=never";
-        }
-      ];
-    };
-  };
-
-  programs.kitty = {
-    enable = true;
-  };
-
+  ]  ++ schoolPkgs;
 }
