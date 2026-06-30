@@ -11,7 +11,6 @@
     pkgs.eclipses.eclipse-java
     pkgs.go
     pkgs.nodejs_24
-    unstable.gemini-cli
     pkgs.logisim-evolution
     pkgs.kicad
     pkgs.proton-vpn
