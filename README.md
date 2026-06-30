@@ -12,19 +12,20 @@ I do not recommend using my setup for personal use, but if you do I recommend th
 
 
 ---
-# TODOs 
-- TODO: Make SwayNC finally look nice.
-- TODO: Set up KDE Connect?
-- TODO: Customize up starship
-- TODO: Set up anti-virus scan to run automatically
-- TODO: Add CPU usage tracker in waybar
-- TODO: Configure starship to work with nix-shell and show custom prompt for it
-- TODO: Set up nix to track doom-emacs and config. It only technically works right now.
-- TODO: Fix unused variables and clean shit up
-- TODO: Set up auto shutdown for desktop specifically.
+# TODOs
+- [ ] TODO: Set up KDE Connect?
+- [x] TODO: Customize starship
+- [ ] TODO: Set up anti-virus scan to run automatically
+- [ ] TODO: Add CPU usage tracker in waybar
+- [ ] TODO: Configure starship to work with nix-shell and show custom prompt for it
+- [x] TODO: Set up nix to track doom-emacs and config. It only technically works right now.
+- [ ] TODO: Fix unused variables and clean shit up
+- [ ] TODO: Set up auto shutdown for desktop specifically.
 
 --- 
 
 # Requirements 
 `cargo install rider2emacs` for unity lsp support
 `cargo install matugen` for color themeing for quickshell
+
+IMPORTANT: Make sure that you add .cargo/bin to your PATH so programs can run it.
