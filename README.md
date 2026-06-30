@@ -14,8 +14,8 @@ I do not recommend using my setup for personal use, but if you do I recommend th
 ---
 # TODOs 
 - TODO: Make SwayNC finally look nice.
-- TODO: Set up KDE Connect
-- TODO: Set up starship
+- TODO: Set up KDE Connect?
+- TODO: Customize up starship
 - TODO: Set up anti-virus scan to run automatically
 - TODO: Add CPU usage tracker in waybar
 - TODO: Configure starship to work with nix-shell and show custom prompt for it

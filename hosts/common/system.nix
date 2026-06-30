@@ -68,6 +68,11 @@
   # Linux Kernel Version
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Needed for wazuh scanning
+  boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches" = 524288;
+  };
+
   boot.extraModprobeConfig = "options kvm_amd nested=1";
 
   time.timeZone = timezone;
