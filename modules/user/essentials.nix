@@ -22,7 +22,8 @@
     pkgs.imhex   # Hex Editor
     pkgs.p7zip
 
-    pkgs.remmina # RDP Client
+    pkgs.remmina # RDP, VNC, SSH Client
+    pkgs.wayvnc  # VNC Server for wayland
 
     # DE PKGS
     pkgs.wayland # What Hyprland is built on
