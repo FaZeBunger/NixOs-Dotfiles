@@ -1,3 +1,62 @@
+#+title: Config
+#+Author: Ethan Beyl
+
+* Table of Contents :toc:
+- [[#todos-01][TODOS]]
+- [[#packages][Packages]]
+  - [[#useful-snippets][Useful Snippets]]
+- [[#config][Config]]
+  - [[#original-config-need-to-fix][Original Config (Need to fix)]]
+  - [[#git-auto-fetch][Git Auto Fetch]]
+  - [[#insert-tree][Insert Tree]]
+  - [[#treemacs-keybind][Treemacs Keybind]]
+  - [[#make-org-headers-look-nicer][Make Org headers look nicer]]
+  - [[#merge-conflict-buttons][Merge Conflict Buttons]]
+  - [[#org-roam-ui][Org-Roam-UI]]
+- [[#features-to-implement][Features to Implement]]
+  - [[#orderless][Orderless]]
+  - [[#look-into-denote-for-note-management][Look Into Denote for Note Management]]
+  - [[#combobulate][Combobulate]]
+
+* TODOS [0/1]
+- [ ] Clean up the config to be easier to navigate and read.
+
+* Packages
+#+begin_src emacs-lisp :tangle packages.el
+;; -*- no-byte-compile: t; -*-
+;;; $DOOMDIR/packages.el
+(package! magit-todos)
+(package! git-gutter)
+(package! tldr)
+(package! leetcode)
+(package! conflict-buttons)
+
+;;; We do this so that org-roam-ui will work properly since it wants the most recent version of org-roam but doom wants strict version control
+(unpin! org-roam)
+(package! org-roam-ui)
+
+;; Unity Integration Package
+(straight-use-package
+ '(unity :type git :host github :repo "elizagamedev/unity.el"))
+(add-hook 'after-init-hook #'unity-mode)
+
+
+;; Quickshell LSP support
+;;(use-package qml-ts-mode
+;;  :after lsp-mode
+;;  :config
+;;  (add-to-list 'lsp-language-id-configuration '(qml-ts-mode . "qml-ts"))
+;;  (lsp-register-client
+;;   (make-lsp-client :new-connection (lsp-stdio-connection '("qmlls"))
+;;                    :activation-fn (lsp-activate-on "qml-ts")
+;;                    :server-id 'qmlls))
+;;  (add-hook 'qml-ts-mode-hook (lambda ()
+;;                                (setq-local electric-indent-chars '(?\n ?\( ?\) ?{ ?} ?\[ ?\] ?\; ?,))
+;;                                (lsp-deferred))))
+
+#+end_src
+** Useful Snippets
+#+begin_src emacs-lisp
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;; (package! some-package)
 
@@ -41,6 +100,10 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
+#+end_src
+* Config
+** Original Config (Need to fix)
+#+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el --- Summary: My Doom emacs config -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
@@ -157,7 +220,15 @@
   '(org-level-4 :inherit outline-4 :height 1.2 :weight bold)
   '(org-level-5 :inherit outline-5 :height 1.1 :weight bold)
   '(org-document-title :height 1.8 :bold t :underline nil))
+#+end_src
 
+#+RESULTS:
+| doom--customize-themes-h-1042 | doom--customize-themes-h-1043 | doom--customize-themes-h-1044 | doom--customize-themes-h-1045 |
+
+** Git Auto Fetch
+This is a custom plugin I've been working on to autosync git repositories when you enter them. It would be inefficient however, to fetch each time you enter a new repo since it would happen frequently. Instead it will check on a configurable interval, and log it's latest check for each repository in a file. If the repository was recently fetched. We won't fetch it, but you still can manually fetch if you'd like.
+
+#+begin_src emacs-lisp
 ;;; git-auto-fetch.el --- Auto-fetch git repositories -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
@@ -229,7 +300,10 @@ Format: ((\"/path/to/repo/\" AUTO-FETCH-BOOLEAN LAST-FETCH-TIME) ...)")
 
 (provide 'git-auto-fetch)
 ;;; git-auto-fetch.el ends here
+#+end_src
 
+** Insert Tree
+#+begin_src emacs-lisp
 (defun insert-tree ()
   "Inserts a Tree for a given directory"
   (interactive)
@@ -242,17 +316,35 @@ Format: ((\"/path/to/repo/\" AUTO-FETCH-BOOLEAN LAST-FETCH-TIME) ...)")
 (map! :leader
       :desc "Insert Filetree"
       "i t" #'insert-tree)
+#+end_src
 
+** Treemacs Keybind
+I wanted to keep my FileTree on the left side to quickly navigate project files outside of having to go to the file explorer buffer each time. Doom Emacs has a built in function for this called treemacs.
+#+begin_src emacs-lisp
 (map! :leader
       :desc "Toggle Treemacs File Explorer"
       "e e" #'treemacs)
-
+#+end_src
+** Make Org headers look nicer
+#+begin_src emacs-lisp
 (after! org-modern
   (setq org-modern-star '("◉" "○" "✿" "✸" "✤" "✜" "◆" "▶")))
+#+end_src
 
+#+RESULTS:
+| ◉ | ○ | ✿ | ✸ | ✤ | ✜ | ◆ | ▶ |
+** Merge Conflict Buttons
+#+begin_src emacs-lisp
 (use-package! conflict-buttons
   :hook (find-file . conflict-buttons-mode))
+#+end_src
 
+#+RESULTS:
+| tramp-set-connection-local-variables-for-buffer | conflict-buttons-mode | gdb-find-file-hook | undo-fu-session--recover-safe | recentf-track-opened-file | projectile-find-file-hook-function | persp-add-or-not-on-find-file | org-roam-db-autosync--setup-file-h | auto-revert-find-file-function | git-commit-setup-check-buffer | doom-modeline-update-persp-name | doom-modeline-update-vcs | doom-modeline-update-buffer-file-name | doom-modeline-update-buffer-file-icon | doom-modeline-update-env | git-auto-fetch/check-for-repo | url-handlers-set-buffer-mode | git-gutter-mode | +vc-init-smerge-mode-h | epa-file-find-file-hook | vc-refresh-state | save-place-find-file-hook |
+
+** Org-Roam-UI
+Adds a pretty graph view for emacs roam files. Like Obsidian but emacs.
+#+begin_src emacs-lisp
 (use-package! websocket
     :after org-roam)
 
@@ -263,3 +355,11 @@ Format: ((\"/path/to/repo/\" AUTO-FETCH-BOOLEAN LAST-FETCH-TIME) ...)")
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
+#+end_src
+* Features to Implement
+** Orderless
+Allows you to search for functions like `org-export-dispatch-to-pdf` by just typing `org pdf export`
+** Look Into Denote for Note Management
+[[https://github.com/protesilaos/denote]]
+** Combobulate
+Uses TreeSitter to allow you to edit and move code around easier than other methods by understanding the syntax of the code so when you move a block it avoids other blocks

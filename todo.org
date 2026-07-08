@@ -1,0 +1,2 @@
+* Inbox
+** TODO Figure out why the Ideas Capture isn't working

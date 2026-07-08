@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Class Notes Template
+# key: <n
+# --
+#+TITLE: ${1:Document Title}
+#+DATE: `(format-time-string "%Y-%m-%d")`
+#+CLASS: ${2:Course Name}
+#+FILETAGS: :${3:tags}:
+
+$0

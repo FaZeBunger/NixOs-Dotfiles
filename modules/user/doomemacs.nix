@@ -75,6 +75,15 @@ in
     # Add the emacs script to pkgs
     emacsHereScript
     pkgs.jq # Required to parse Hyprland's JSON output
+
+    # Makes org roam graph view work
+    graphviz
+
+    # Spell checking for UNIX (Needed for emacs spell checking)
+    ispell
+
+    # This should probably be under system or essentials but I'm putting it here because I'm building an emacs plugin with it rn lol
+    tree
   ];
 
   home.sessionPath = [
