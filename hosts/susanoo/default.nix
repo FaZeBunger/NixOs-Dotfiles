@@ -4,6 +4,7 @@
     ../common/system.nix
     ./hardware-configuration.nix
     ../../modules/system/virtualization.nix
+    ../../modules/system/minecraft-optimization.nix
   ];
 
   networking.hostName = "susanoo";

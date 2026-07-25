@@ -9,5 +9,4 @@
     pkgs.bluez-alsa # Bluz Alsa Backend
     pkgs.bluez-tools # Tools to manage bluetooth devices
   ];
-
 }

@@ -1,6 +1,5 @@
 { config, hostname, ... }:
 {
-
   networking = {
     firewall = {
       enable = true;
