@@ -108,8 +108,10 @@
   };
 
   # Enable locate service
-  services.locate.enable = true;
-  services.locate.locate = pkgs.plocate;
+  services.locate = {
+    enable = true;
+    package = pkgs.plocate;
+  };
 
   # Enable the Wayland display server.
   services.xserver.enable = true;

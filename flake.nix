@@ -20,14 +20,14 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, stylix, antigravity, ... }@inputs:
     let
-      system = "x86_64-linux";
+      hostSystem = "x86_64-linux";
       name = "Ethan Beyl";
       username = "ebeyl";
       timezone = "America/Chicago";
       defaultLocale = "en_US.UTF-8";
       email = "ethan.j.beyl-1@ou.edu";
       unstable = import nixpkgs-unstable {
-        localSystem = system;
+        localSystem = hostSystem;
         config.allowUnfree = true;
       };
     in
@@ -41,10 +41,11 @@
             inherit defaultLocale;
             inherit username;
             inherit unstable;
+            inherit hostSystem;
           };
 
           modules = [
-            { nixpkgs.hostPlatform = system; }
+            { nixpkgs.hostPlatform = hostSystem; }
             ./hosts/susanoo/default.nix
             stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
@@ -76,11 +77,12 @@
             inherit defaultLocale;
             inherit username;
             inherit unstable;
+            inherit hostSystem;
           };
 
 
           modules = [
-            { nixpkgs.hostPlatform = system; }
+            { nixpkgs.hostPlatform = hostSystem; }
             ./hosts/izanagi/default.nix
             stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
