@@ -16,6 +16,13 @@
     pkgs.proton-vpn
     pkgs.python3 # Python
     pkgs.python312Packages.pip # Python Pip
+    pkgs.pkg-config # C utility for libraries
+    pkgs.clang
+    pkgs.clang-tools
+    pkgs.cmake
+    pkgs.cmake-language-server
+    pkgs.cmake-lint
+    pkgs.cmake-format
   ];
 
   programs.lazygit = {

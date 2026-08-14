@@ -158,78 +158,6 @@
   '(org-level-5 :inherit outline-5 :height 1.1 :weight bold)
   '(org-document-title :height 1.8 :bold t :underline nil))
 
-;;; git-auto-fetch.el --- Auto-fetch git repositories -*- lexical-binding: t; -*-
-;;; Commentary:
-;;; Code:
-
-(defvar git-auto-fetch/repos nil
-  "Alist storing repository preferences and timestamps.
-Format: ((\"/path/to/repo/\" AUTO-FETCH-BOOLEAN LAST-FETCH-TIME) ...)")
-
-(defvar git-auto-fetch/last-repo nil
-  "Tracks the last visited git repository to prevent duplicate checks.")
-
-(defvar git-auto-fetch/cooldown 3600
-  "Seconds to wait before fetching the same repo again (3600 = 1 hour).")
-
-;; Persist the alist across Emacs sessions using Doom's built-in session manager
-(with-eval-after-load 'savehist
-  (add-to-list 'savehist-additional-variables 'git-auto-fetch/repos))
-
-(defun git-auto-fetch/do-fetch (repo)
-  "Run git fetch asynchronously in the background for REPO."
-  (message "Auto-fetching repo: %s" repo)
-  (let ((default-directory repo))
-    (magit-run-git-async "fetch" "--all" "--quiet")))
-
-(defun git-auto-fetch/check-for-repo ()
-  "Check repository state, handle cooldowns, or prompt if unknown."
-  (let ((current-repo (magit-toplevel)))
-    (when (and current-repo
-               (not (equal current-repo git-auto-fetch/last-repo)))
-
-      ;; Remember we are here to avoid spamming on every subsequent file open
-      (setq git-auto-fetch/last-repo current-repo)
-
-      (let ((entry (assoc current-repo git-auto-fetch/repos))
-            (now (float-time (current-time))))
-
-        (if entry
-            ;; Repo is known. Extract the stored data.
-            (let ((auto-fetch-enabled (nth 1 entry))
-                  (last-fetch-time (nth 2 entry)))
-
-              ;; If auto-fetch is on AND the cooldown has expired
-              (when (and auto-fetch-enabled
-                         (> (- now last-fetch-time) git-auto-fetch/cooldown))
-                (git-auto-fetch/do-fetch current-repo)
-                ;; Update memory with new timestamp (shadows the old entry)
-                (push (list current-repo t now) git-auto-fetch/repos)))
-
-          ;; Repo is unknown. Prompt the user.
-          (let ((choice (completing-read (format "Auto-sync repo %s? " current-repo)
-                                         '("yes" "no" "abort") nil t)))
-            (cond
-             ((string= choice "yes")
-              (git-auto-fetch/do-fetch current-repo)
-              (push (list current-repo t now) git-auto-fetch/repos))
-
-             ((string= choice "no")
-              ;; Save 'no' with a 0 timestamp so it is remembered forever
-              (push (list current-repo nil 0) git-auto-fetch/repos))
-
-             ((string= choice "abort")
-              (message "Aborted. Will ask again next time.")
-              ;; Clear last-repo so it reprompts immediately on the next file open
-              (setq git-auto-fetch/last-repo nil)))))))))
-
-;; Attach to file and directory open events
-(add-hook 'find-file-hook #'git-auto-fetch/check-for-repo)
-(add-hook 'dired-mode-hook #'git-auto-fetch/check-for-repo)
-
-(provide 'git-auto-fetch)
-;;; git-auto-fetch.el ends here
-
 (defun insert-tree ()
   "Inserts a Tree for a given directory"
   (interactive)
@@ -263,3 +191,43 @@ Format: ((\"/path/to/repo/\" AUTO-FETCH-BOOLEAN LAST-FETCH-TIME) ...)")
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
+
+(after! lsp-mode
+  (setq lsp-clients-clangd-args
+        '("--query-driver=/nix/store/**/bin/*gcc*"
+          "--background-index")))
+
+;; Use the modern EPA pinentry behavior
+(setq epa-pinentry-mode 'loopback)
+(setq epg-gpg-program "gpg")
+
+;; Tell GPG which terminal to prompt on, when running in a terminal Emacs.
+;; Safe to include even under GUI Emacs (pinentry-loopback prompts via
+;; the minibuffer instead, so GPG_TTY mostly matters for terminal use).
+(setenv "GPG_TTY" (getenv "TTY"))
+
+(require 'auth-source)
+
+(defun my/get-canvas-ics-url ()
+  "Safely retrieve and decrypt the Canvas ICS URL from ~/.authinfo.gpg."
+  (let ((match (car (auth-source-search :host "canvas-calendar" :port "ics"))))
+    (if match
+        (let ((secret (plist-get match :secret)))
+          (if (functionp secret) (funcall secret) secret))
+      (error "Could not find 'canvas-calendar' entry in authinfo file"))))
+
+(defvar my/canvas-diary-file (expand-file-name "canvas-diary" org-directory))
+
+(defun my/canvas-sync ()
+  "Fetch the Canvas ICS feed and import assignments into a diary file."
+  (interactive)
+  (let ((tmp-ics (make-temp-file "canvas" nil ".ics"))
+        (url (my/get-canvas-ics-url)))
+    (url-copy-file url tmp-ics t)
+    (with-temp-file my/canvas-diary-file "")
+    (icalendar-import-file tmp-ics my/canvas-diary-file t)
+    (delete-file tmp-ics)
+    (message "Canvas calendar synced.")))
+
+(setq lsp-clients-clangd-executable "clangd")
+(setq lsp-clients-clangd-args '("-j=6" "--background-index"))

@@ -28,6 +28,17 @@
     fangfrisch.enable = true;
   };
 
+  #  Install GnuPG for encryption and
+  #  Configure the GPG Agent daemon and password entry tool
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-curses;
+    enableSSHSupport = true;
+  };
+
+  # Smart card daemon service (highly recommended for GPG operations)
+  services.pcscd.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
