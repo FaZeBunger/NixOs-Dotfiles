@@ -15,13 +15,11 @@
     pkgs.kicad
     pkgs.proton-vpn
     pkgs.python312Packages.pip # Python Pip
-<<<<<<< HEAD
     (pkgs.python3.withPackages (ps: with ps; [
       pillow
       tkinter
       requests
     ]))
-=======
     pkgs.pkg-config # C utility for libraries
     pkgs.clang
     pkgs.clang-tools
@@ -29,7 +27,6 @@
     pkgs.cmake-language-server
     pkgs.cmake-lint
     pkgs.cmake-format
->>>>>>> origin/main
   ];
 
   programs.lazygit = {
