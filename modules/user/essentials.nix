@@ -14,6 +14,7 @@
     pkgs.steam
     pkgs.fastfetch
     pkgs.persepolis   # A python download manager for linux. Since free download manager isn't in the nix store
+    pkgs.caffeine     # A tool to keep your computer from turning off or turning off the screen
 
     pkgs.grimblast # Screenshot tool
     pkgs.magic-wormhole

@@ -14,8 +14,12 @@
     pkgs.logisim-evolution
     pkgs.kicad
     pkgs.proton-vpn
-    pkgs.python3 # Python
     pkgs.python312Packages.pip # Python Pip
+    (pkgs.python3.withPackages (ps: with ps; [
+      pillow
+      tkinter
+      requests
+    ]))
   ];
 
   programs.lazygit = {

@@ -142,23 +142,16 @@ StatCard {
     // ─────────────────────────────────────────────────────────────────────────
     //  Caffeine  (systemd-inhibit)
     // ─────────────────────────────────────────────────────────────────────────
-    property bool caffeineOn: false
+    // The Process naturally stores its own running state in 'caffeineProc.running'
+    Process {
+        id: caffeineProc
+        command: ["systemd-inhibit", "--what=idle", "--who=Brain Shell", "--why=Caffeine mode", "sleep", "infinity"]
+        running: false
+    }
 
-    Process { id: caffeineCheck
-        command: ["bash", "-c", "pgrep -f 'systemd-inhibit.*Caffeine'"]; running: false
-        stdout: SplitParser { onRead: function(l) { if (l.trim() !== "") root.caffeineOn = true } } }
-    Process { id: caffeineProc
-        command: ["systemd-inhibit","--what=idle:sleep",
-                  "--who=Brain Shell","--why=Caffeine mode","sleep","infinity"]
-        running: false }
-    Process { id: caffeineKill
-        command: ["bash", "-c", "pkill -f 'systemd-inhibit.*Caffeine'"]; running: false
-        onRunningChanged: if (!running) root.caffeineOn = false }
     function _caffeineToggle() {
-        if (root.caffeineOn) {
-            caffeineProc.running = false
-            caffeineKill.running = false; caffeineKill.running = true
-        } else { caffeineProc.running = true; root.caffeineOn = true }
+        // Simple state flip. Quickshell handles clean process termination automatically.
+        caffeineProc.running = !caffeineProc.running;
     }
 
     // ─────────────────────────────────────────────────────────────────────────
