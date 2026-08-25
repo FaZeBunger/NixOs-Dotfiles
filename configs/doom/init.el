@@ -17,8 +17,7 @@
 (doom! :input
        ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
        ;;chinese
-       ;;japanese
-       ;;layout            ; auie,ctsrnm is the superior home row
+       ;;japanese layout            ; auie,ctsrnm is the superior home row
 
        :completion
        ;;company           ; the ultimate code completion backend
@@ -29,7 +28,7 @@
        vertico           ; the search engine of the future
 
        :ui
-       ;;deft              ; notational velocity for Emacs
+       deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        dashboard         ; a nifty splash screen for Emacs
        ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
@@ -188,7 +187,7 @@
        ;;(wanderlust +gmail)
 
        :app
-       ;;calendar
+       calendar
        ;;emms
        ;;everywhere        ; *leave* Emacs!? You must be joking
        ;;irc               ; how neckbeards socialize
