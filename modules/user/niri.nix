@@ -3,6 +3,15 @@
 {
   imports = [ inputs.niri.homeModules.niri ];
 
+  xdg.desktopEntries.emacsclient = {
+    name = "Emacs (Client)";
+    genericName = "Text Editor";
+    exec = "emacsclient -c -a \"\"";
+    icon = "emacs";
+    terminal = false;
+    categories = [ "Development" "TextEditor" ];
+  };
+
   programs.niri = {
     enable = true;
     settings = {
@@ -22,6 +31,15 @@
       };
 
       spawn-at-startup = [
+        { argv = [
+            "dbus-update-activation-environment"
+            "--systemd"
+            "WAYLAND_DISPLAY"
+            "DISPLAY"
+            "XDG_CURRENT_DESKTOP"
+            "XDG_SESSION_TYPE"
+          ];
+        }
         # Launch Noctalia shell on startup
         { argv = ["noctalia"]; }
         # Niri needs a polkit authentication agent
@@ -41,12 +59,7 @@
             { proportion = 0.66667; }
         ];
         default-column-width = { proportion = 0.5; };
-        focus-ring = {
-            enable = true;
-            width = 2;
-            active.color = "#7fc8ff";
-            inactive.color = "#505050";
-        };
+        focus-ring.enable = false;
         border.enable = false;
       };
 
@@ -57,18 +70,20 @@
         # --- Apps ---
         "Mod+Return".action.spawn = ["kitty"];
         "Mod+B".action.spawn = ["firefox"];
-        "Mod+E".action.spawn = ["dolphin"]; # File manager
+        "Mod+E".action.spawn = ["thunar"]; # File manager
         "Mod+Q".action.close-window = [];
         
         # --- Rofi / Launcher ---
-        "Alt+Space".action.spawn = ["rofi" "-show" "drun"];
+        # "Alt+Space".action.spawn = ["rofi" "-show" "drun"];
         # Or you can use Noctalia's launcher:
-        # "Alt+Space".action.spawn = ["noctalia" "-t" "launcher"];
+        "Alt+Space".action.spawn = ["noctalia" "msg" "panel-toggle" "launcher"];
+
+        # Notifications
+        "Mod+N".action.spawn = ["noctalia" "msg" "panel-toggle" "control-center" "notifications"];
 
         # --- Utilities ---
         "Mod+C".action.screenshot = {}; # Niri's built-in screenshot
         "Mod+Shift+C".action.screenshot-screen = {};
-        "Mod+N".action.spawn = ["noctalia" "-t" "notifications"]; # Open Noctalia notifications
         "Mod+L".action.spawn = ["hyprlock"]; # Lock screen using hyprlock
         "Mod+Shift+E".action.quit = { skip-confirmation = false; }; # Exit Niri
 

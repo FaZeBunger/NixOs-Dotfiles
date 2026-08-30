@@ -30,4 +30,21 @@
       recursive = true;
     };
   };
+
+  # Add Emacs to the XDG entry
+  xdg.desktopEntries.emacsclient = {
+    name = "Emacs (Client)";
+    genericName = "Text Editor";
+    exec = ''emacsclient -c -a ""'';
+    icon = "emacs";
+    terminal = false;
+    categories = [ "Development" "TextEditor" ];
+  };
+
+  # Enable emacs by default so the daemon is always running
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;   # native Wayland GUI support — important for daemon+GUI
+    client.enable = false;         # provides a proper emacsclient .desktop entry too, not needed since I made my own
+  };
 }
