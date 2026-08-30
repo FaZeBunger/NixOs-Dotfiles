@@ -2,6 +2,8 @@
 {
   imports = [
     ../common/home.nix
+    ../../modules/user/niri.nix
+    ../../modules/user/noctalia.nix
   ];
 
   programs.btop = {

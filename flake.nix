@@ -12,9 +12,17 @@
       url = "github:nix-community/stylix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, nixpkgs-unstable, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, nixpkgs-unstable, niri, noctalia, ... }@inputs:
     let
       system = "x86_64-linux";
       name = "Ethan Beyl";
