@@ -22,6 +22,13 @@
         focus-follows-mouse.enable = false;
       };
 
+      outputs = {
+        "eDP-1" = {
+            scale = 1.5;
+            position = { x = 0; y = 0; };
+        };
+      };
+
       spawn-at-startup = [
         { argv = ["noctalia"]; }
         { argv = ["swaybg" "--image" "/path/to/wallpaper.jpg"]; }
@@ -53,6 +60,7 @@
 
       binds = {
         "Mod+Return".action.spawn = ["kitty"];
+        "Mod+B".action.spawn = ["firefox"];
         "Mod+Q".action.close-window = [];
         "Mod+1".action.focus-workspace = 1;
         "Mod+2".action.focus-workspace = 2;
@@ -75,6 +83,12 @@
         "Mod+Ctrl+8".action.focus-workspace = 8;
         "Mod+Ctrl+9".action.focus-workspace = 9;
         "Mod+Ctrl+0".action.focus-workspace = 10;
+
+
+        "Super+Left".action = "focus-column-left";
+        "Super+Right".action = "focus-column-right";
+        "Super+Up".action = "focus-window-up";
+        "Super+Down".action = "focus-window-down";
 
         "Mod+C".action.screenshot = {};
 
