@@ -10,6 +10,29 @@
   networking.hostName = "susanoo";
 
   # Mount Other Drives
+  # Enable Hyprland
+  programs.hyprland.enable = true;
+
+  systemd.user.services.swaync = {
+    enable = true;
+    description = "Sway Notification Center";
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
+      Restart = "on-failure";
+    };
+    unitConfig = {
+      PartOf = "graphical-session.target";
+    };
+  };
+
+  services.greetd.enable = true;
+  services.greetd.settings.default_session = {
+    command = "start-hyprland";
+    user = "ebeyl";
+  };
+
+  #Mount Other Drives
   fileSystems."/mnt/ssd1" = {
     device = "/dev/disk/by-uuid/8A1ECEB11ECE961B";
     fsType = "ntfs-3g";

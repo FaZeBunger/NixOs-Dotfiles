@@ -117,28 +117,8 @@
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
 
-  services.greetd.enable = true;
-  services.greetd.settings.default_session = {
-    command = "start-hyprland";
-    user = "ebeyl";
-  };
-
-  # systemd.user.services.swaync = {
-  #   enable = true;
-  #   description = "Sway Notification Center";
-  #   wantedBy = [ "graphical-session.target" ];
-  #   serviceConfig = {
-  #     ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
-  #     Restart = "on-failure";
-  #   };
-  #   unitConfig = {
-  #     PartOf = "graphical-session.target";
-  #   };
-  # };
-
 
   # Enable xWayland apps to work
-  programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -160,6 +140,7 @@
     pkgs.clamav # OpenSource AntiVirus
     pkgs.neovim
     pkgs.ntfs3g
+    pkgs.niri
 
     # Media and Audio PGKS
     pkgs.pavucontrol # Audio Mixer and Controller

@@ -16,9 +16,17 @@
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, stylix, antigravity, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, nixpkgs-unstable, niri, noctalia, antigravity, ... }@inputs:
     let
       hostSystem = "x86_64-linux";
       name = "Ethan Beyl";

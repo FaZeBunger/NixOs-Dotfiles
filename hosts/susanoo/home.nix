@@ -7,6 +7,25 @@
     ../../modules/user/unity.nix
   ];
 
+  home.file = {
+    ".config/hypr" = {
+      source = ../../configs/hypr;
+      recursive = true;
+    };
+    ".config/waybar" = {
+      source = ../../configs/waybar;
+      recursive = true;
+    };
+    ".config/rofi" = {
+      source = ../../configs/rofi;
+      recursive = true;
+    };
+    ".config/swaync" = {
+      source = ../../configs/swaync;
+      recursive = true;
+    };
+  };
+
   # Install BTOP with gpu support on desktop only
   programs.btop = {
     enable = true;
