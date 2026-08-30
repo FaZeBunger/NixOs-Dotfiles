@@ -90,12 +90,9 @@
 
   # Enable the Wayland display server.
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
 
-
-  # Enable xWayland apps to work
+  # Enable Niri globally (it's safe to have on both, but we launch it per-host)
   programs.niri.enable = true;
-  programs.hyprland.xwayland.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
