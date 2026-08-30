@@ -12,6 +12,8 @@
   # Mount Other Drives
   # Enable Hyprland
   programs.hyprland.enable = true;
+  # Enable xWayland apps to work
+  programs.hyprland.xwayland.enable = true;
 
   systemd.user.services.swaync = {
     enable = true;

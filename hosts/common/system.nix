@@ -115,11 +115,6 @@
 
   # Enable the Wayland display server.
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-
-
-  # Enable xWayland apps to work
-  programs.hyprland.xwayland.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

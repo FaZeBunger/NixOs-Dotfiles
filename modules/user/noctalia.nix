@@ -1,38 +1,37 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-  imports = [
-    inputs.noctalia.homeManager.default
-  ];
+  imports = [ inputs.noctalia.homeModules.default ];
 
   programs.noctalia = {
-        settings = {
-            # Bar layout
-            bar.default = {
-                start = ["workspaces" "active_window" "media" ];   # left side
-                end   = ["volume" "battery" "bluetooth" "network" "clock" "tray" "notifications" ];  # right side
-                thickness = 36;          # bar height in pixels
-                margin_ends = 1.0;       # horizontal margin (0 = full width)
-                padding = 4;             # internal padding
-                capsule = true;         # pill/floating bar style
-            };
+    enable = true;
+    
+    settings = {
+      # The main bar definition
+      bar.default = {
+        # Modules on the left side
+        start = [ "workspaces" "active_window" ];
+        
+        # Modules on the right side
+        end = [ 
+          "tray" 
+          "notifications" 
+          "network" 
+          "bluetooth" 
+          "volume" 
+          "battery" 
+          "clock" 
+          "session" 
+        ];
+        
+        thickness = 36;
+        margin_ends = 0.0; # full width
+        padding = 4;
+        capsule = false;
+      };
 
-            theme = {
-                mode = "dark";
-                source = "builtin";
-                builtin = "Catppuccin";
-            };
-
-            wallpaper = {
-                enabled = true;
-                default.path = "../../wallpapers/nasa.png";
-            };
-        };
-
-
-  systemd.enable = true;
-  recommendedServices.enable = true;
-  # Workspaces widget options
-  # (configured via the widget in the bar, not separately)
+      # Example: Noctalia uses the default styling and allows you to
+      # configure the exact look inside the GUI settings menu!
+    };
   };
 }

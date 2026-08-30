@@ -98,14 +98,20 @@ in
     };
   };
 
-  # Create the Desktop Entry so Rofi sees our new emacs command it automatically
-  xdg.desktopEntries."emacsclient" = {
-    name = "Emacs (Current Directory)";
+  # Add Emacs to the XDG entry
+  xdg.desktopEntries.emacsclient = {
+    name = "Emacs (Client)";
     genericName = "Text Editor";
-    exec = "emacs-here";
+    exec = ''emacsclient -c -a ""'';
     icon = "emacs";
     terminal = false;
     categories = [ "Development" "TextEditor" ];
-    comment = "Open Emacs client in the directory of the active window";
+  };
+
+  # Enable emacs by default so the daemon is always running
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;   # native Wayland GUI support — important for daemon+GUI
+    client.enable = false;         # provides a proper emacsclient .desktop entry too, not needed since I made my own
   };
 }
