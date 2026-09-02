@@ -231,3 +231,5 @@
 
 (setq lsp-clients-clangd-executable "clangd")
 (setq lsp-clients-clangd-args '("-j=6" "--background-index"))
+
+(add-to-list 'default-frame-alist '(undecorated . t))

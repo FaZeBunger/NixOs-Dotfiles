@@ -3,18 +3,16 @@
 {
   imports = [ inputs.niri.homeModules.niri ];
 
-  xdg.desktopEntries.emacsclient = {
-    name = "Emacs (Client)";
-    genericName = "Text Editor";
-    exec = "emacsclient -c -a \"\"";
-    icon = "emacs";
-    terminal = false;
-    categories = [ "Development" "TextEditor" ];
-  };
+  home.packages = [
+    # This is needed to run X11 apps on wayland
+    pkgs.xwayland-satellite
+  ];
 
   programs.niri = {
     enable = true;
     settings = {
+      prefer-no-csd = true;
+
       input = {
         keyboard = {
             xkb.layout = "us";

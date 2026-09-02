@@ -1,2 +1,17 @@
 * Inbox
-** TODO Figure out why the Ideas Capture isn't working
+** TODO Remove Stylix
+Look idk you probably don't need it anymore. If you really go with noctalia, it does all the theming anyway. And like yeah maybe not for the desktop, that's something to look into, it may not be that bad a cost, maybe it is, but AT LEAST GET IT OFF THE LAPTOP IF UR GONNA USE NOCTALIA
+** TODO I kinda wanna go back to zsh
+IDK, fish is nice, it has good completions, but I basically never use them, and it doesn't use the POSIX format which makes it a bit more readable, but means I have to translate a bunch of common things written for POSIX compliant stuff. Not to mention that while it hasn't caused issues so far, it can cause issues in the emergency shell.
+
+Look into it.
+
+** DONE Get Emacs to work properly
+It won't launch from the normal launcher because it doesn't know which display to use.
+Use `emacsclient -c -a "" --display=$WAYLAND_DISPLAY` to make it launch correctly
+** DONE Kill that Ugly ass bar
+I mean the bar that is on the top with the close button and such.
+Certain programs probably shouldn't have it for example kitty, emacs, etc.
+Idk how to fix it rn but look it up
+
+** DONE Figure out why the Ideas Capture isn't working

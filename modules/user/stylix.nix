@@ -4,16 +4,8 @@
   stylix.image = ../../wallpapers/nasa.png; 
   stylix.polarity = "dark";
   stylix.targets.hyprland.hyprpaper.enable = true;
-
-  # Wallpaper Daemon
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = [ "${config.stylix.image}"];
-      wallpaper = [
-      ",${config.stylix.image}"
-      ];
-    };
+  stylix.targets = {
+    vesktop.enable = true;
   };
 
   stylix.fonts = {
@@ -27,5 +19,16 @@
     package = pkgs.rose-pine-cursor;
     name = "BreezeX-RosePine-Linux";
     size = 24;
+  };
+
+  # Wallpaper Daemon
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [ "${config.stylix.image}"];
+      wallpaper = [
+      ",${config.stylix.image}"
+      ];
+    };
   };
 }

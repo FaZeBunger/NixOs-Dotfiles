@@ -5,7 +5,6 @@
     ./hardware-configuration.nix
   ];
 
-  services.upower.enable = true;
 
   # Enable Niri on laptop
   programs.niri.enable = true;
@@ -19,8 +18,8 @@
   # Make sure these are on for Noctalia
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
-  services.tuned.enable = true;
   services.upower.enable = true;
+  services.tuned.enable = true;
 
   networking.hostName = "izanagi";
 }

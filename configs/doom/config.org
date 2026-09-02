@@ -17,6 +17,7 @@
   - [[#gpg-encryption-with-emacs][GPG Encryption with Emacs]]
   - [[#canvas-calendar-integration][Canvas Calendar Integration]]
   - [[#make-emacs-work-with-c-headers-on-nixos][Make Emacs work with C headers on NixOS]]
+  - [[#remove-emacs-title-bar][Remove Emacs Title Bar]]
 - [[#features-to-implement][Features to Implement]]
   - [[#orderless][Orderless]]
   - [[#combobulate][Combobulate]]
@@ -332,7 +333,10 @@ Adds a pretty graph view for emacs roam files. Like Obsidian but emacs.
 (setq lsp-clients-clangd-executable "clangd")
 (setq lsp-clients-clangd-args '("-j=6" "--background-index"))
 #+end_src
-
+** Remove Emacs Title Bar
+#+begin_src emacs-lisp
+(add-to-list 'default-frame-alist '(undecorated . t))
+#+end_src
 
 * Features to Implement
 ** Orderless
