@@ -2,13 +2,14 @@
 {
   fonts.fontconfig.enable = true;
   fonts.packages = [
-    pkgs.pkgs.jetbrains-mono
-    pkgs.pkgs.fira-code
-    pkgs.pkgs.font-awesome
-    pkgs.pkgs.cascadia-code
-    pkgs.pkgs.jetbrains-mono
-    pkgs.pkgs.material-design-icons
-    pkgs.pkgs.mononoki
-    pkgs.pkgs.noto-fonts-cjk-sans
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.fira-code
+
+    # Standard Package Namespaces
+    pkgs.font-awesome
+    pkgs.cascadia-code
+    pkgs.material-design-icons
+    pkgs.mononoki
+    pkgs.noto-fonts-cjk-sans
   ];
 }

@@ -169,7 +169,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep 10";
-    flake = "/home/ebeyl/.dotfiles"; # sets NH_OS_FLAKE variable for you
+    flake = "/home/ebeyl/.dotfiles"; # sets NH_OS_FLAKE variable
   };
 
   programs._1password.enable = true;
@@ -196,5 +196,5 @@
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s recommended to leave this value at
   # the version of NixOS you installed.
-  system.stateVersion = "25.11"; # Replace with your NixOS version (e.g., 23.11)
+  system.stateVersion = "25.11"; 
 }

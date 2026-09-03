@@ -3,10 +3,8 @@
   imports = [
     ../../modules/user/school.nix
     ../../modules/user/essentials.nix
-    ../../modules/user/stylix.nix
     ../../modules/user/fish.nix
     ../../modules/user/doomemacs.nix
-    ../../modules/user/quickshell.nix
     ../../modules/user/antigravity.nix
     ../../modules/user/programming.nix
   ];
@@ -37,10 +35,6 @@
     };
     ".config/starship" = {
       source = ../../configs/starship;
-      recursive = true;
-    };
-    ".config/quickshell" = {
-      source = ../../configs/quickshell;
       recursive = true;
     };
   };

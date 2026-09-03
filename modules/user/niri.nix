@@ -8,35 +8,50 @@
     pkgs.xwayland-satellite
   ];
 
+  home.pointerCursor = {
+    package = pkgs.rose-pine-cursor;
+    name = "BreezeX-RosePine-Linux";
+    size = 24;
+    # Tells HM to link the icon files to ~/.icons and ~/.local/share/icons
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
   programs.niri = {
     enable = true;
     settings = {
       prefer-no-csd = true;
 
+      cursor = {
+        theme = "BreezeX-RosePine-Linux";
+        size = 24;
+      };
+
+
       input = {
         keyboard = {
-            xkb.layout = "us";
-            repeat-delay = 600;
-            repeat-rate = 25;
-            numlock = false;
-            track-layout = "global";
+          xkb.layout = "us";
+          repeat-delay = 600;
+          repeat-rate = 25;
+          numlock = false;
+          track-layout = "global";
         };
         touchpad = {
-            tap = true;
-            natural-scroll = true;
+          tap = true;
+          natural-scroll = true;
         };
         focus-follows-mouse.enable = false;
       };
 
       spawn-at-startup = [
         { argv = [
-            "dbus-update-activation-environment"
-            "--systemd"
-            "WAYLAND_DISPLAY"
-            "DISPLAY"
-            "XDG_CURRENT_DESKTOP"
-            "XDG_SESSION_TYPE"
-          ];
+          "dbus-update-activation-environment"
+          "--systemd"
+          "WAYLAND_DISPLAY"
+          "DISPLAY"
+          "XDG_CURRENT_DESKTOP"
+          "XDG_SESSION_TYPE"
+        ];
         }
         # Launch Noctalia shell on startup
         { argv = ["noctalia"]; }
@@ -52,9 +67,9 @@
         gaps = 8;
         center-focused-column = "never";
         preset-column-widths = [
-            { proportion = 0.33333; }
-            { proportion = 0.5; }
-            { proportion = 0.66667; }
+          { proportion = 0.33333; }
+          { proportion = 0.5; }
+          { proportion = 0.66667; }
         ];
         default-column-width = { proportion = 0.5; };
         focus-ring.enable = false;
@@ -70,7 +85,7 @@
         "Mod+B".action.spawn = ["firefox"];
         "Mod+E".action.spawn = ["thunar"]; # File manager
         "Mod+Q".action.close-window = [];
-        
+
         # --- Rofi / Launcher ---
         # "Alt+Space".action.spawn = ["rofi" "-show" "drun"];
         # Or you can use Noctalia's launcher:
@@ -82,7 +97,7 @@
         # --- Utilities ---
         "Mod+C".action.screenshot = {}; # Niri's built-in screenshot
         "Mod+Shift+C".action.screenshot-screen = {};
-        "Mod+L".action.spawn = ["hyprlock"]; # Lock screen using hyprlock
+        "Mod+L".action.spawn = ["noctalia" "msg" "session" "lock"];
         "Mod+Shift+E".action.quit = { skip-confirmation = false; }; # Exit Niri
 
         # --- Window Management ---
@@ -134,7 +149,7 @@
         # Consume / Expel (Stacking windows vertically in a column)
         "Mod+Comma".action.consume-window-into-column = [];
         "Mod+Period".action.expel-window-from-column = [];
-        
+
         # Change column width quickly
         "Mod+Minus".action.set-column-width = "-10%";
         "Mod+Equal".action.set-column-width = "+10%";

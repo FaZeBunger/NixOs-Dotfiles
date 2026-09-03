@@ -5,25 +5,28 @@
 
   programs.noctalia = {
     enable = true;
-    
+
     settings = {
+      shell = {
+        font_family = "JetBrainsMono Nerd Font";
+      };
       # The main bar definition
       bar.default = {
         # Modules on the left side
         start = [ "workspaces" "active_window" ];
-        
+
         # Modules on the right side
         end = [ 
-          "tray" 
-          "notifications" 
-          "network" 
-          "bluetooth" 
-          "volume" 
-          "battery" 
-          "clock" 
-          "session" 
+        "tray"
+        "notifications"
+        "network"
+        "bluetooth"
+        "volume"
+        "battery"
+        "clock"
+        "session"
         ];
-        
+
         thickness = 36;
         margin_ends = 0.0; # full width
         padding = 4;
