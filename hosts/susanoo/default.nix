@@ -9,7 +9,6 @@
 
   networking.hostName = "susanoo";
 
-  # Mount Other Drives
   # Enable Hyprland
   programs.hyprland.enable = true;
   # Enable xWayland apps to work
