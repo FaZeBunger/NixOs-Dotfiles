@@ -1,5 +1,5 @@
 * Inbox
-** TODO Remove Stylix
+** DONE Remove Stylix
 Look idk you probably don't need it anymore. If you really go with noctalia, it does all the theming anyway. And like yeah maybe not for the desktop, that's something to look into, it may not be that bad a cost, maybe it is, but AT LEAST GET IT OFF THE LAPTOP IF UR GONNA USE NOCTALIA
 ** TODO Setup git creds with name and email
 Every time you reinstalled you had to re-setup git when you could have managed it with nix.
