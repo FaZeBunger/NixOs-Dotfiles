@@ -233,3 +233,22 @@
 (setq lsp-clients-clangd-args '("-j=6" "--background-index"))
 
 (add-to-list 'default-frame-alist '(undecorated . t))
+
+;; --- OCaml / Nix setup (no opam) ---
+;; lsp-mode defaults to `opam exec -- ocamllsp`, which doesn't exist in a
+;; Nix+direnv setup. Override it to call ocamllsp directly (it's on PATH
+;; via direnv).
+(after! lsp-ocaml
+  (setq lsp-ocaml-lsp-server-command '("ocamllsp")))
+
+;; Suppress all opam-related hooks — opam-switch-mode errors out without opam.
+(after! tuareg
+  (remove-hook 'tuareg-mode-hook #'opam-switch-mode)
+  (remove-hook 'tuareg-mode-local-vars-hook #'opam-switch-mode)
+  ;; Prevent tuareg from trying to insinuate opam into the environment.
+  (setq tuareg-opam-insinuate nil))
+
+(after! org-download
+  (setq org-download-method 'directory)
+  (setq org-download-image-dir "~/org/images/")
+  (setq org-download-image-org-width 600))
