@@ -252,3 +252,5 @@
   (setq org-download-method 'directory)
   (setq org-download-image-dir "~/org/images/")
   (setq org-download-image-org-width 600))
+
+(setq-default pgtk-wait-for-event-timeout 0)

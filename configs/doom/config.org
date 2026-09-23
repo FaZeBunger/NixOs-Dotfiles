@@ -20,6 +20,7 @@
   - [[#remove-emacs-title-bar][Remove Emacs Title Bar]]
   - [[#tell-ocaml-lsp-not-to-use-opam][Tell OCaml LSP not to use opam]]
   - [[#org-download-for-easy-images][Org-Download for easy images]]
+  - [[#fix-latency-on-niri][Fix latency on niri]]
 - [[#features-to-implement][Features to Implement]]
   - [[#orderless][Orderless]]
   - [[#combobulate][Combobulate]]
@@ -362,6 +363,13 @@ Adds a pretty graph view for emacs roam files. Like Obsidian but emacs.
   (setq org-download-image-dir "~/org/images/")
   (setq org-download-image-org-width 600))
 #+end_src
+** Fix latency on niri
+#+begin_src emacs-lisp
+(setq-default pgtk-wait-for-event-timeout 0)
+#+end_src
+
+#+RESULTS:
+: 0
 
 * Features to Implement
 ** Orderless
