@@ -74,9 +74,10 @@
   boot.loader.systemd-boot.enable = true;
 
   # Make sure drivers for NTFS drives are always loaded on boot
-  boot.supportedFilesystems = [ "ntfs" ];
+  # Also add drivers for SD Cards
+  boot.supportedFilesystems = [ "ntfs" "exfat" "vfat"];
 
-  # Linux Kernel Version
+  # Always use latest Linux Kernel Version
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Needed for wazuh scanning
@@ -119,6 +120,8 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.systemPackages = [
+    # ExFat file system utilities (SD Cards)
+    pkgs.exfatprogs
 
     # Nix PKGS
     pkgs.kitty # Default Hyprland terminal

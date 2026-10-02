@@ -7,6 +7,7 @@
     ../../modules/user/doomemacs.nix
     ../../modules/user/antigravity.nix
     ../../modules/user/programming.nix
+    ../../modules/user/hacking.nix
   ];
 
 

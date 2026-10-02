@@ -19,7 +19,7 @@
 
   # We define this here even though we manage noctalia mostly on the user level,
   # our greeter runs before we login and should get the direct path to things like what the cursor should look like
-  programs.noctalia-greeter = {
+  services.displayManager.noctalia-greeter = {
     enable = true; # Ensures the greeter service is active
     settings = {
       cursor = {

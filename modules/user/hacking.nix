@@ -2,6 +2,9 @@
 
 {
   home.packages = with pkgs; [
+    # VPN
+    openvpn
+
     # Network & Port Scanning
     nmap
     rustscan
@@ -17,12 +20,10 @@
     hashcat
 
     # Active Directory, SMB & Windows
-    smbclient
+    smbclient-ng
     enum4linux-ng
-    impacket
 
     # Shells & Networking
-    openbsd-netcat
     rlwrap
 
     # Exploitation Frameworks
