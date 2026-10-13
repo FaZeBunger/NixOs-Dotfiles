@@ -4,9 +4,8 @@
 
 terminal    = "kitty"
 fileManager = "thunar"
-menu        = "rofi -show combi -modes \"drun,run,window\" -combi-modes \"window,drun,run\""
+menu        = "noctalia msg panel-toggle launcher"
 browser     = "firefox"
-
 
 hl.env("XCURSOR_SIZE",   "24")
 hl.env("XCURSOR_THEME",  "BreezeX-RosePine")

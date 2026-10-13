@@ -42,6 +42,9 @@
     # This should probably be under system or essentials but I'm putting it here because I'm building an emacs plugin with it rn lol
     tree
     config.services.emacs.package
+
+    # Needed for org-download to work
+    xclip
   ];
 
   home.sessionPath = [

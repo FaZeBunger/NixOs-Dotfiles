@@ -16,7 +16,6 @@ I do not recommend using my setup for personal use, but if you do I recommend th
 - [ ] TODO: Set up KDE Connect?
 - [x] TODO: Customize starship
 - [ ] TODO: Set up anti-virus scan to run automatically
-- [ ] TODO: Add CPU usage tracker in waybar
 - [ ] TODO: Configure starship to work with nix-shell and show custom prompt for it
 - [x] TODO: Set up nix to track doom-emacs and config. It only technically works right now.
 - [ ] TODO: Fix unused variables and clean shit up
@@ -26,6 +25,5 @@ I do not recommend using my setup for personal use, but if you do I recommend th
 
 # Requirements 
 `cargo install rider2emacs` for unity lsp support
-`cargo install matugen` for color themeing for quickshell
 
 IMPORTANT: Make sure that you add .cargo/bin to your PATH so programs can run it.

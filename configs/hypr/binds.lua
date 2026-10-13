@@ -12,9 +12,10 @@ hl.bind(mainMod .. " + C",            hl.dsp.exec_cmd("grimblast --freeze copy a
 hl.bind(mainMod .. " + E",            hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V",            hl.dsp.window.float({action = "toggle"}))
 hl.bind("ALT + space",                hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + R",            hl.dsp.exec_cmd("rofi -show run"))
 hl.bind(mainMod .. " + B",            hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + SHIFT + F",    hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + L",    hl.dsp.exec_cmd("noctalia msg session lock"))
+hl.bind(mainMod .. " + N",    hl.dsp.exec_cmd("noctalia msg panel-toggle control-center notifications"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",         hl.dsp.focus({ direction = "left" }))

@@ -17,19 +17,6 @@
   #   user = "ebeyl";
   # };
 
-  # We define this here even though we manage noctalia mostly on the user level,
-  # our greeter runs before we login and should get the direct path to things like what the cursor should look like
-  services.displayManager.noctalia-greeter = {
-    enable = true; # Ensures the greeter service is active
-    settings = {
-      cursor = {
-        theme = "BreezeX-RosePine-Linux";
-        size = 24;
-        path = "${pkgs.rose-pine-cursor}/share/icons";
-      };
-    };
-  };
-
 
   # Make sure these are on for Noctalia
   networking.networkmanager.enable = true;

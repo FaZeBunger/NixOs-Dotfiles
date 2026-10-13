@@ -8,6 +8,7 @@
     ../../modules/user/antigravity.nix
     ../../modules/user/programming.nix
     ../../modules/user/hacking.nix
+    ../../modules/user/noctalia.nix
   ];
 
 

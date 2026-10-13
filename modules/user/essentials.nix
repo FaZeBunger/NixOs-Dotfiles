@@ -7,7 +7,6 @@
     pkgs.firefox
     pkgs.vesktop
     pkgs.hyprland
-    pkgs.waybar
     pkgs.neovim
     pkgs.rofi
     pkgs.spotify
