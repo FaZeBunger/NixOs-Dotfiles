@@ -6,5 +6,9 @@
     pkgs.osu-lazer
     pkgs.linux-wallpaperengine
     pkgs.prismlauncher
+    pkgs.lutris
+    pkgs.wineWow64Packages.stable
+    pkgs.umu-launcher
+    pkgs.bottles
   ];
 }
