@@ -24,7 +24,13 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    pkgs.gh
   ];
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
+  };
 
 
   # Tells NixOS where to store the configs for programs managed by Nix
