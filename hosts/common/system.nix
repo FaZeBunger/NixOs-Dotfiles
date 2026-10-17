@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, hostname, username, timezone, defaultLocale, ... }:
+{ config, lib, pkgs, inputs, hostname, username, timezone, defaultLocale, ... }:
 {
   imports =
     [
@@ -90,8 +90,8 @@
   # Also add drivers for SD Cards
   boot.supportedFilesystems = [ "ntfs" "exfat" "vfat"];
 
-  # Always use latest Linux Kernel Version
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Always use latest Linux Kernel Version by default; hosts may override
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   # Needed for wazuh scanning
   boot.kernel.sysctl = {

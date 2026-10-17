@@ -56,6 +56,7 @@
           { nixpkgs.hostPlatform = hostSystem; }
           ./hosts/susanoo/default.nix
           home-manager.nixosModules.home-manager
+          inputs.noctalia-greeter.nixosModules.default
           {
             home-manager.useUserPackages = true;
             home-manager.useGlobalPkgs = false;

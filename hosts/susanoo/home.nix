@@ -2,7 +2,7 @@
 {
   imports = [
     ../common/home.nix
-    ../../modules/user/assistant.nix
+    # ../../modules/user/assistant.nix
     ../../modules/user/gaming.nix
     ../../modules/user/unity.nix
   ];
