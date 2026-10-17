@@ -27,6 +27,7 @@
     pkgs.cmake-language-server
     pkgs.cmake-lint
     pkgs.cmake-format
+    pkgs.aider-chat-full
   ];
 
   programs.lazygit = {

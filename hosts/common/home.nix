@@ -3,12 +3,12 @@
   imports = [
     ../../modules/user/school.nix
     ../../modules/user/essentials.nix
-    ../../modules/user/stylix.nix
     ../../modules/user/fish.nix
     ../../modules/user/doomemacs.nix
-    ../../modules/user/quickshell.nix
     ../../modules/user/antigravity.nix
     ../../modules/user/programming.nix
+    ../../modules/user/hacking.nix
+    ../../modules/user/noctalia.nix
   ];
 
 
@@ -24,7 +24,13 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    pkgs.gh
   ];
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
+  };
 
 
   # Tells NixOS where to store the configs for programs managed by Nix
@@ -35,28 +41,8 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/configs/nvim";
       recursive = true;
     };
-    ".config/hypr" = {
-      source = ../../configs/hypr;
-      recursive = true;
-    };
-    ".config/waybar" = {
-      source = ../../configs/waybar;
-      recursive = true;
-    };
-    ".config/rofi" = {
-      source = ../../configs/rofi;
-      recursive = true;
-    };
-    ".config/swaync" = {
-      source = ../../configs/swaync;
-      recursive = true;
-    };
     ".config/starship" = {
       source = ../../configs/starship;
-      recursive = true;
-    };
-    ".config/quickshell" = {
-      source = ../../configs/quickshell;
       recursive = true;
     };
   };

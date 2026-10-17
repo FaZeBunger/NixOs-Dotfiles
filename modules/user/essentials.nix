@@ -7,7 +7,6 @@
     pkgs.firefox
     pkgs.vesktop
     pkgs.hyprland
-    pkgs.waybar
     pkgs.neovim
     pkgs.rofi
     pkgs.spotify
@@ -15,7 +14,6 @@
     pkgs.fastfetch
     pkgs.persepolis   # A python download manager for linux. Since free download manager isn't in the nix store
 
-    pkgs.grimblast # Screenshot tool
     pkgs.magic-wormhole
     pkgs.qdirstat # WinDirStat for Linux
     pkgs.ffmpeg

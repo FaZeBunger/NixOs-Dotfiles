@@ -2,10 +2,18 @@
 {
   imports = [
     ../common/home.nix
-    ../../modules/user/assistant.nix
+    # ../../modules/user/assistant.nix
     ../../modules/user/gaming.nix
     ../../modules/user/unity.nix
   ];
+
+  # TODO: Configure hyprland with nix rather than using lua file symlinks
+  home.file = {
+    ".config/hypr" = {
+      source = ../../configs/hypr;
+      recursive = true;
+    };
+  };
 
   # Install BTOP with gpu support on desktop only
   programs.btop = {

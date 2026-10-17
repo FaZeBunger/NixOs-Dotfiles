@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, hostname, username, timezone, defaultLocale, ... }:
+{ config, lib, pkgs, inputs, hostname, username, timezone, defaultLocale, ... }:
 {
   imports =
     [
@@ -12,6 +12,19 @@
 
   # Enable Tailscale
   services.tailscale.enable = true;
+
+  # We define this here even though we manage noctalia mostly on the user level,
+  # our greeter runs before we login and should get the direct path to things like what the cursor should look like
+  services.displayManager.noctalia-greeter = {
+    enable = true; # Ensures the greeter service is active
+    settings = {
+      cursor = {
+        theme = "BreezeX-RosePine-Linux";
+        size = 24;
+        path = "${pkgs.rose-pine-cursor}/share/icons";
+      };
+    };
+  };
 
   # Enable Docker
   virtualisation.docker.enable = true;
@@ -74,10 +87,11 @@
   boot.loader.systemd-boot.enable = true;
 
   # Make sure drivers for NTFS drives are always loaded on boot
-  boot.supportedFilesystems = [ "ntfs" ];
+  # Also add drivers for SD Cards
+  boot.supportedFilesystems = [ "ntfs" "exfat" "vfat"];
 
-  # Linux Kernel Version
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Always use latest Linux Kernel Version by default; hosts may override
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   # Needed for wazuh scanning
   boot.kernel.sysctl = {
@@ -115,35 +129,12 @@
 
   # Enable the Wayland display server.
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-
-  services.greetd.enable = true;
-  services.greetd.settings.default_session = {
-    command = "start-hyprland";
-    user = "ebeyl";
-  };
-
-  # systemd.user.services.swaync = {
-  #   enable = true;
-  #   description = "Sway Notification Center";
-  #   wantedBy = [ "graphical-session.target" ];
-  #   serviceConfig = {
-  #     ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
-  #     Restart = "on-failure";
-  #   };
-  #   unitConfig = {
-  #     PartOf = "graphical-session.target";
-  #   };
-  # };
-
-
-  # Enable xWayland apps to work
-  programs.hyprland.enable = true;
-  programs.hyprland.xwayland.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.systemPackages = [
+    # ExFat file system utilities (SD Cards)
+    pkgs.exfatprogs
 
     # Nix PKGS
     pkgs.kitty # Default Hyprland terminal
@@ -160,6 +151,7 @@
     pkgs.clamav # OpenSource AntiVirus
     pkgs.neovim
     pkgs.ntfs3g
+    pkgs.niri
 
     # Media and Audio PGKS
     pkgs.pavucontrol # Audio Mixer and Controller
@@ -193,7 +185,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep 10";
-    flake = "/home/ebeyl/.dotfiles"; # sets NH_OS_FLAKE variable for you
+    flake = "/home/ebeyl/.dotfiles"; # sets NH_OS_FLAKE variable
   };
 
   programs._1password.enable = true;
@@ -220,5 +212,5 @@
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s recommended to leave this value at
   # the version of NixOS you installed.
-  system.stateVersion = "25.11"; # Replace with your NixOS version (e.g., 23.11)
+  system.stateVersion = "25.11"; 
 }

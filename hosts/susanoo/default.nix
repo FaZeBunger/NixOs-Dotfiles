@@ -9,7 +9,32 @@
 
   networking.hostName = "susanoo";
 
-  # Mount Other Drives
+  # Enable Hyprland
+  # programs.hyprland.enable = true;
+  # Enable xWayland apps to work
+  # programs.hyprland.xwayland.enable = true;
+
+# Noctalia Greeter launches hyprland so remove the enable and just make sure it exists & tell the session what our displayManager is.
+services.displayManager.sessionPackages = [ pkgs.hyprland ];
+programs.xwayland.enable = true;
+
+# Install UWSM's user systemd units so noctalia-greeter can launch wayland sessions
+systemd.packages = [ pkgs.uwsm ];
+
+environment.systemPackages = with pkgs; [
+  hyprland
+  wayland
+  xwayland
+];
+
+# Add portal config so hyprland.desktop appears.
+xdg.portal = {
+  enable = true;
+  extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  configPackages = [ pkgs.xdg-desktop-portal-hyprland ];
+};
+
+  #Mount Other Drives
   fileSystems."/mnt/ssd1" = {
     device = "/dev/disk/by-uuid/8A1ECEB11ECE961B";
     fsType = "ntfs-3g";
@@ -51,6 +76,11 @@
   systemd.targets.hibernate.enable =  false;
   systemd.targets.hybrid-sleep.enable =  false;
 
+  # Pin to LTS kernel — linuxPackages_latest resolves to 7.2+ which breaks
+  # NVIDIA 595.x kernel module compilation (missing strncpy API). Override
+  # the common setting here until a fixed driver lands in nixpkgs stable.
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
+
   # Enable NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
 
@@ -79,7 +109,7 @@
     # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
     # Only available from driver 515.43.04+
     # Currently alpha-quality/buggy, so false is currently the default.
-    open = true;
+    open = false; # Used true for a while, then it broke. Worth looking into again
 
     # Enable the Nvidia settings menu,
 	  # accessible via `nvidia-settings`.
