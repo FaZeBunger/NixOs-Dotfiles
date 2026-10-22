@@ -153,9 +153,9 @@
        ;;ledger            ; be audit you can be
        (lua +lsp)               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
-       ;;nim               ; python + lisp at the speed of c
+       (nim +lsp +treesitter)              ; python + lisp at the speed of c
        (nix +lsp +treesitter)               ; I hereby declare "nix geht mehr!"
-       ;;ocaml             ; an objective camel
+       (ocaml +lsp +treesitter)            ; an objective camel
        ;;odin              ; C, minus its footguns
        (org +pretty +roam2 +dragndrop)               ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
