@@ -1,0 +1,9 @@
+[book]
+title = "Ethan's NixOS Dotfiles"
+authors = ["Ethan Beyl"]
+language = "en"
+src = "src"
+
+[output.html]
+git-repository-url = "https://github.com/FaZeBunger/NixOs-Dotfiles"
+additional-css = ["src/custom.css"]
