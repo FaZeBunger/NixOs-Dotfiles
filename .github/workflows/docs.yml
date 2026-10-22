@@ -4,47 +4,52 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
-  build-docs:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
 
-      - name: Generate app list
+      - name: Generate docs
         run: |
           mkdir -p docs
-          python3 - <<'PY'
-          from pathlib import Path
-
-          docs = Path("docs")
-          docs.mkdir(exist_ok=True)
-
-          # Example placeholder doc generation
-          body = """# Dotfiles Overview
+          cat > docs/index.md <<'EOF'
+          # Dotfiles Overview
 
           This page is generated automatically by GitHub Actions.
 
           ## Notes
-          - Generated from the repo state
-          - Rebuilt on pushes to main
-          """
-
-          (docs / "index.md").write_text(body)
-          PY
+          - Built from the repo contents
+          - Regenerated on pushes to main
+          EOF
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
