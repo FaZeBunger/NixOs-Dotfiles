@@ -1,0 +1,50 @@
+name: Docs
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
+
+      - name: Generate app list
+        run: |
+          mkdir -p docs
+          python3 - <<'PY'
+          from pathlib import Path
+
+          docs = Path("docs")
+          docs.mkdir(exist_ok=True)
+
+          # Example placeholder doc generation
+          body = """# Dotfiles Overview
+
+          This page is generated automatically by GitHub Actions.
+
+          ## Notes
+          - Generated from the repo state
+          - Rebuilt on pushes to main
+          """
+
+          (docs / "index.md").write_text(body)
+          PY
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
