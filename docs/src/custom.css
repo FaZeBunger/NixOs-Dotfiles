@@ -1,0 +1,55 @@
+/* Wider content area for code blocks */
+:root {
+  --content-max-width: 900px;
+}
+
+/* Nix code blocks get a subtle left border */
+pre > code.language-nix {
+  border-left: 3px solid #7eb8da;
+  padding-left: 1em;
+}
+
+/* Module metadata badges */
+.module-meta {
+  display: flex;
+  gap: 0.5em;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+}
+
+.module-meta span {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.badge-system {
+  background: #3b4252;
+  color: #88c0d0;
+}
+
+.badge-user {
+  background: #3b4252;
+  color: #a3be8c;
+}
+
+.badge-host {
+  background: #3b4252;
+  color: #ebcb8b;
+}
+
+.badge-config {
+  background: #3b4252;
+  color: #b48ead;
+}
+
+/* File path shown under title */
+.file-path {
+  font-family: monospace;
+  font-size: 0.85em;
+  color: #888;
+  margin-top: -0.5em;
+  margin-bottom: 1em;
+}
